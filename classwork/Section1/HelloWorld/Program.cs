@@ -13,6 +13,10 @@ namespace HelloWorld
     {
         static void Main ( string[] args )
         {
+            string name;
+            name = "Bob";
+            string name2 = name;
+
             Console.WriteLine ("Hello World!");
         }
     }
