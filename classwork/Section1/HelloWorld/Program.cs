@@ -12,7 +12,7 @@ namespace HelloWorld
     class Program
     {
         static void Main ( string[] args )
-        {
+        { 
             string name;
             name = "Bob";
             string name2 = name;
