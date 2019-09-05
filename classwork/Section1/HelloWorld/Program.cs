@@ -14,11 +14,11 @@ namespace HelloWorld
         static void Main ( string[] args )
         {
             //Movie data
-            string title;
+            /*string title;
             int runLength;
             int releaseYear;
             string description;
-            bool haveSeen;
+            bool haveSeen;*/
 
             while (true)
             {
@@ -26,6 +26,9 @@ namespace HelloWorld
                 if (input == 'A')
                 {
                     AddMovie ();
+                } else if (input == 'D')
+                {
+                    DisplayMovie ();
                 } else if (input == 'Q')
                 {
                     break;
@@ -37,17 +40,40 @@ namespace HelloWorld
         {
             //Get title
             Console.Write ("Title: ");
-            string title = Console.ReadLine ();
+             title = Console.ReadLine ();
             //Get description
             Console.Write ("Description: ");
-            string description = Console.ReadLine ();
+             description = Console.ReadLine ();
             //Get release year
-            int releaseYear = ReadInt32 ("Release Year: ");
+             releaseYear = ReadInt32 ("Release Year: ");
             //Get run length
-            int runLength = ReadInt32 ("Run Length (in minutes): ");
+             runLength = ReadInt32 ("Run Length (in minutes): ");
             //Get have seen
-            bool haveSeen = ReadBoolean ("Have Seen?: ");
+             hasSeen = ReadBoolean ("Have Seen?: ");
 
+        }
+
+        static void DisplayMovie()
+        {
+            //Title, description, release year, run length, hasSeen
+            Console.WriteLine (title);
+            Console.WriteLine (description);
+
+            //Formatting strings
+            //1) String concat
+            Console.WriteLine ("Released " + releaseYear);
+
+            //2) Printf
+            // Console.WriteLine ("Run Time: {0}", runLength);
+
+            //3) String formatting
+            var formattedString = String.Format ("Run time: [0]", runLength);
+            Console.WriteLine (formattedString);
+
+            //4) String interpolation (best option maybe)
+            //$" = interpolated string. changes how processor processes the string. can put almost any expression within {}
+            //However, whatever is within {} HAS to be in there at compile time
+            Console.WriteLine ($"Seen it? {hasSeen}");
         }
 
         static int ReadInt32(string message)
@@ -59,7 +85,7 @@ namespace HelloWorld
                 // int result = Int32.Parse (input);
                 //int result;
                 // if (Int32.TryParse (input, out result))
-                if (Int32.TryParse (input, out int result))
+                if (Int32.TryParse (input, out var result))
                 {
                     return result;
                 }
@@ -86,17 +112,23 @@ namespace HelloWorld
             do
             {
                 Console.WriteLine ("A)dd Movie");
+                Console.WriteLine ("D)isplay Movie");
                 Console.WriteLine ("Q)uit");
 
                 string input = Console.ReadLine ();
-                if (input == "A" || input == "a")
+
+                //lower case
+                input = input.ToLower ();
+                //if (input == "A" || input == "a")
+               // if (input == "a")
+               if (String.Compare(input, "a")==0)
                 {
                     return 'A';
-                } 
-                else if (input == "Q" || input == "q")
-                {
+                } else if (input == "q")
+                    {
                     return 'Q';
-                } 
+                } else if (input == "d")
+                            return 'D';
                 else
                 {
                     Console.WriteLine ("Invalid input");
@@ -124,5 +156,40 @@ namespace HelloWorld
 
             string fullName = "Fred" + " " + "Jones";
         }
+        static void DemoArray()
+        {
+            double[] payRates = new double[100];
+
+            //50th element to 7.25
+            payRates[49] = 7.25;
+
+            //read 89th element into temp variable
+            double payRate = payRates[88];
+
+            //print out the 80th element
+            Console.WriteLine (payRates[79]);
+
+            //An empty array
+            bool[] isPassing = new bool[0];
+
+            //Enumerating an array. variableArrayName.Length gives length of the array
+            for (int index = 0; index < payRates.Length; ++index)
+                Console.WriteLine (payRates[index]);
+
+            var name = "Bob William Smith Jr III"; //var stands for variable. name will be the type of variable depending on its contents
+            string[] nameParts = name.Split (' ');
+            //split is a function available to any string expression that 
+            //splits the string into any set of characters. gives you an array of strings. Here, splits by space
+
+
+
+        }
+
+        //DONT DO THIS OUTSIDE LAB ONE. GLOBAL VARIABLE ARE TABOO
+        static string title;
+        static string description;
+        static int runLength;
+        static int releaseYear;
+        static bool hasSeen;
     }
 }
