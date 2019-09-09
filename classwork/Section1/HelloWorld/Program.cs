@@ -20,20 +20,55 @@ namespace HelloWorld
             string description;
             bool haveSeen;*/
 
-            while (true)
+            var quit = false;
+            while (!quit)
             {
                 char input = DisplayMenu ();
-                if (input == 'A')
+                
+                switch (input) //switches MUST end every single case statement with either a break or return
+                {
+                    //empty cases do fall through, can be useful 
+                    //case 'a':
+                    case 'A': AddMovie (); break;
+                    case 'D': DisplayMovie (); break;
+                    case 'R': RemoveMovie (); break;
+                    case 'Q':
+                    {
+                        quit = true;
+                        break;
+                    }
+                    default: Console.WriteLine("Not supported"); break;
+                };
+                /*if (input == 'A')
                 {
                     AddMovie ();
-                } else if (input == 'D')
+                } 
+                else if (input == 'D')
                 {
                     DisplayMovie ();
-                } else if (input == 'Q')
+                } 
+                else if (input == 'R')
+                {
+                    RemoveMovie ();
+                }
+                else if (input == 'Q')
                 {
                     break;
-                }
+                }*/
             };
+        }
+
+        private static void RemoveMovie ()
+        {
+            //Confirm removal
+            //Please don't do this expression == true, expression. Just use the expression
+            if (!ReadBoolean ($"Are you sure you want to remove {title}? "))
+            {
+                return;
+            }
+
+            //Remove movie
+            title = null;
         }
 
         static void AddMovie()
@@ -55,6 +90,13 @@ namespace HelloWorld
 
         static void DisplayMovie()
         {
+            //Display message if no movies
+            if(String.IsNullOrEmpty(title))
+            {
+                Console.WriteLine ("No movies");
+                return;
+            }
+
             //Title, description, release year, run length, hasSeen
             Console.WriteLine (title);
             Console.WriteLine (description);
@@ -74,6 +116,9 @@ namespace HelloWorld
             //$" = interpolated string. changes how processor processes the string. can put almost any expression within {}
             //However, whatever is within {} HAS to be in there at compile time
             Console.WriteLine ($"Seen it? {hasSeen}");
+
+            //String.Compare("", "", StringComparison.)
+            Console.WriteLine ("".PadLeft(50, '-'));
         }
 
         static int ReadInt32(string message)
@@ -113,6 +158,7 @@ namespace HelloWorld
             {
                 Console.WriteLine ("A)dd Movie");
                 Console.WriteLine ("D)isplay Movie");
+                Console.WriteLine ("R)emove Movie");
                 Console.WriteLine ("Q)uit");
 
                 string input = Console.ReadLine ();
@@ -120,15 +166,19 @@ namespace HelloWorld
                 //lower case
                 input = input.ToLower ();
                 //if (input == "A" || input == "a")
-               // if (input == "a")
-               if (String.Compare(input, "a")==0)
+                // if (input == "a")
+                if (String.Compare (input, "a")==0)
                 {
                     return 'A';
-                } else if (input == "q")
-                    {
+                } 
+                else if (input == "q")
+                {
                     return 'Q';
-                } else if (input == "d")
-                            return 'D';
+                } 
+                else if (input == "d")
+                    return 'D';
+                else if (input == "r")
+                    return 'R';
                 else
                 {
                     Console.WriteLine ("Invalid input");
@@ -185,6 +235,27 @@ namespace HelloWorld
 
         }
 
+        static void DemoString()
+        {
+            string str = null;
+
+            //checking for null or empty string
+            if(str != null && str  != "")
+                str = str.ToLower ();
+
+            //Length - NO
+            if (str != null && str.Length == 0)
+                str = str.ToLower ();
+
+            //Empty - NO
+            if (str != null && str  != String.Empty)
+                str = str.ToLower ();
+
+            //Correct Approach
+            if (!String.IsNullOrEmpty(str))
+                str = str.ToLower ();
+        }
+
         //DONT DO THIS OUTSIDE LAB ONE. GLOBAL VARIABLE ARE TABOO
         static string title;
         static string description;
@@ -193,3 +264,27 @@ namespace HelloWorld
         static bool hasSeen;
     }
 }
+
+/* Determine if 'input' is 'none'
+ *  input == "none"
+ *  String Compare(input, "none", true) == 0 //third variable is case sensitivity
+ *  input.ToLower() == "none"
+ *  
+ * Create an array 'names' that stores 100 names
+ *  string[] names = new string[100]
+ * 
+ * Set first value to 'sue'
+ *  names[0] = "sue"
+ *  
+ * Enumerate values of 'grades'
+ *  for(int x = 0; x < grades.length; ++x)
+ *      grades[x]
+ *      
+ * Display 'You worked x hours', where 'hours' contains hours worked
+ *  Console.WriteLine( "You worked " + hours + " hours");
+ *  Console.WriteLine(String.Format( "You worked {0}", hours));
+ *  Console.WriteLine($"You worked {hours} hours");
+ *  Console.WriteLine("You worked {0} hours", hours);
+ *  
+ * Es.PadLeft, PadRight(int)
+ */
