@@ -17,6 +17,32 @@ namespace Itse1430.Maze
             Room1 ();
         }
 
+        enum Command
+        {
+            Quit = 1,
+            MoveForward,
+            MoveBackward
+        }
+
+        static Command GetCommand()
+        {
+
+
+            return Command.Quit;
+        }
+
+        static Command ParseCommand(string message)
+        {
+            while(true)
+            {
+                string input = Console.ReadLine ();
+                input = input.ToLower ();
+
+            }
+
+
+
+        }
         static void Room1 ()
         {
             Console.WriteLine ("You've entered Rapture, an underwater city situated at the bottom of the ocean. \nOnce a utopia for its citizens, Rapture has fallen into chaos, in part due to the mental instability that resulted from excessive gene-splicing. ");
