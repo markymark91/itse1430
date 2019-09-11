@@ -10,9 +10,10 @@ using System;
 
 namespace Itse1430.Maze
 {
-    enum directions { left = 2, up = 4, right = 8 };
+    
     class Program
     {
+        enum directions { left, up, right, down };
         static void Main(string[] args)
         {
 
@@ -34,17 +35,40 @@ namespace Itse1430.Maze
             return command;
         }
 
-        static void HandleCommand(string choice, string description)
+        static int HandleCommand(string choice, string description)
         {
+            int holder;
+            int left = (int)directions.left;
+            int down = (int)directions.down;
+            int right = (int)directions.right;
+            int up = (int)directions.up;
+            Console.WriteLine($" {left} {down} {right} {up}");
             switch (choice)
             {
                 case "look": Console.WriteLine (description);
+                    break;
+                case "turn left": holder = left; left = down; down = right; right = up; up = holder;
+                    Console.WriteLine ($" {left} {down} {right} {up}");
+                    break;
+                case "turn right": holder = right; right = down; down = left; left = up; up = holder;
+                    Console.WriteLine ($" {left} {down} {right} {up}");
+                    break;
+                case "move left": return left;
+                case "move down": return down;
+                case "move right": return right;
+                case "move up": return up;
+                default: Console.WriteLine ("Invalid input");
                 break;
             }
+            return 5;
         }
 
         static void Room1 ()
         {
+            int room2 = (int)directions.left;
+            int room4 = (int)directions.up;
+            int room8 = (int)directions.right;
+            int deadend = (int)directions.down;
             string description = "You've entered Rapture, an underwater city situated at the bottom of the ocean. \nOnce a utopia for its citizens," +
                 " Rapture has fallen into chaos, in part due to the \nmental instability that resulted from excessive gene-splicing. "+
                 "Your goal is to escape Rapture. \nThere is a room with a bathysphere, which will carry you back to the surface."+
@@ -52,9 +76,29 @@ namespace Itse1430.Maze
                 "\n\nThere are three pathways connected to this room; Left, Right, and Forward";
 
             Console.WriteLine (description);
+            
             Console.WriteLine (directions.left);
             string choice = GetCommand ();
-            HandleCommand (choice, description);
+            int answer = HandleCommand (choice, description);
+            if (answer == room2)
+                Room2 ();
+            if (answer == room4)
+                Room4 ();
+            if (answer == room8)
+                Room8 ();
+            while (answer == deadend)
+            {
+                Console.WriteLine ("That's a deadend! Please enter a valid input");
+                answer = HandleCommand (choice, description);
+                if (answer == room2)
+                    Room2 ();
+                if (answer == room4)
+                    Room4 ();
+                if (answer == room8)
+                    Room8 ();
+            }
+
+           
         }
         static void Room2 ()
         {
