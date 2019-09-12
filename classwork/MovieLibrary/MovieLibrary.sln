@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itse1430.MovieLib.Host", "Itse1430.MovieLib.Host\Itse1430.MovieLib.Host.csproj", "{AC924636-1B2D-46C3-922F-56C5B8ED49CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itse1430.MovieLib", "Itse1430.MovieLib\Itse1430.MovieLib.csproj", "{C2533B5A-9226-47E8-82AF-AE19872488AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AC924636-1B2D-46C3-922F-56C5B8ED49CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC924636-1B2D-46C3-922F-56C5B8ED49CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC924636-1B2D-46C3-922F-56C5B8ED49CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2533B5A-9226-47E8-82AF-AE19872488AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2533B5A-9226-47E8-82AF-AE19872488AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2533B5A-9226-47E8-82AF-AE19872488AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2533B5A-9226-47E8-82AF-AE19872488AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
