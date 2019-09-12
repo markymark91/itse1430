@@ -16,7 +16,6 @@ namespace Itse1430.Maze
         enum directions { left, up, right, down };
         static void Main(string[] args)
         {
-
             Room1 ();
         }
 
@@ -43,22 +42,42 @@ namespace Itse1430.Maze
             int right = (int)directions.right;
             int up = (int)directions.up;
             Console.WriteLine($" {left} {down} {right} {up}");
-            switch (choice)
+            while (true)
             {
-                case "look": Console.WriteLine (description);
-                    break;
-                case "turn left": holder = left; left = down; down = right; right = up; up = holder;
-                    Console.WriteLine ($" {left} {down} {right} {up}");
-                    break;
-                case "turn right": holder = right; right = down; down = left; left = up; up = holder;
-                    Console.WriteLine ($" {left} {down} {right} {up}");
-                    break;
-                case "move left": return left;
-                case "move down": return down;
-                case "move right": return right;
-                case "move up": return up;
-                default: Console.WriteLine ("Invalid input");
-                break;
+                switch (choice)
+                {
+                    case "look":
+                        Console.WriteLine (description);
+                        break;
+                    case "turn left":
+                        holder = left;
+                        left = down;
+                        down = right;
+                        right = up;
+                        up = holder;
+                        Console.WriteLine ($" {left} {down} {right} {up}");
+                        break;
+                    case "turn right":
+                        holder = right;
+                        right = down;
+                        down = left;
+                        left = up;
+                        up = holder;
+                        Console.WriteLine ($" {left} {down} {right} {up}");
+                        break;
+                    case "move left":
+                        return left;
+                    case "move down":
+                        return down;
+                    case "move right":
+                        return right;
+                    case "move up":
+                        return up;
+                    default:
+                        Console.WriteLine ("Invalid input");
+                        break;
+                }  
+                choice = GetCommand ();
             }
             return 5;
         }
@@ -77,7 +96,6 @@ namespace Itse1430.Maze
 
             Console.WriteLine (description);
             
-            Console.WriteLine (directions.left);
             string choice = GetCommand ();
             int answer = HandleCommand (choice, description);
             if (answer == room2)
@@ -102,7 +120,10 @@ namespace Itse1430.Maze
         }
         static void Room2 ()
         {
+            Console.WriteLine ("You've entered room 2!");
             string description = "This is the description of this dank place";
+            Console.WriteLine (description);
+
         }
         static void Room3 ()
         {
@@ -110,7 +131,9 @@ namespace Itse1430.Maze
         }
         static void Room4 ()
         {
-
+            Console.WriteLine ("You've entered room 4!");
+            string description = "This is the description of this dank place";
+            Console.WriteLine (description);
         }
         static void Room5 ()
         {
@@ -126,7 +149,9 @@ namespace Itse1430.Maze
         }
         static void Room8 ()
         {
-
+            Console.WriteLine ("You've entered room 8!");
+            string description = "This is the description of this dank place";
+            Console.WriteLine (description);
         }
         static void Room9 ()
         {
