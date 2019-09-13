@@ -13,15 +13,22 @@ namespace Itse1430.Maze
     
     class Program
     {
-        enum directions { left, up, right, down };
+        //enum directions { left, up, right, down };
         static void Main(string[] args)
         {
             Room1 ();
         }
 
-        static void ChangeDirection()
+        static void ChangeDirection(string answer)
         {
-
+            if (answer == "left")
+                s_left = "up"; s_down = "left"; s_right = "down"; s_up = "right";
+            if (answer == "right")
+                s_right = "up"; s_down = "right"; s_left = "down"; s_up = "left";
+            if (answer == "down")
+                s_down = "up"; s_up = "down"; s_left = "right"; s_right = "down";
+            if (answer == "up")
+                s_up = "up"; s_down = "down"; s_left = "left"; s_right = "right";
         }
 
         static string GetCommand()
@@ -87,120 +94,175 @@ namespace Itse1430.Maze
 
         static void Room1 ()
         {
-            string room2 = s_left;
+            /*string room2 = s_left;
             string room4 = s_up;
-            string room8 = s_right;
-            string deadend = s_down;
-            string description = "You've entered Rapture, an underwater city situated at the bottom of the ocean. \nOnce a utopia for its citizens," +
+            string room8 = s_right;*/
+            string description = "\nYou've entered Rapture, an underwater city situated at the bottom of the ocean. \nOnce a utopia for its citizens," +
                 " Rapture has fallen into chaos, in part due to the \nmental instability that resulted from excessive gene-splicing. "+
                 "Your goal is to escape Rapture. \nThere is a room with a bathysphere, which will carry you back to the surface."+
                 "\nYou find yourself in the welcome lobby. Loose rubble is scattered across the flooded floor, \nwater leaking from cracked windows and busted pipes. " +
-                "\n\nThere are three pathways connected to this room; Left, Right, and Forward";
+                "\n\nYou are currently facing " + s_up + ". There are pathways to your " + s_left + ", " + s_up + ", and " + s_right +".\n"
 
             Console.WriteLine (description);
             
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
-            if (answer == room2)
+            if (answer == "left")
             {
                 Console.WriteLine (room2);
                 Room2 ();
             }
-            if (answer == room4)
-                Room4 ();
-            if (answer == room8)
-                Room8 ();
-            while (answer == deadend)
-            {
-                Console.WriteLine ("That's a deadend! Please enter a valid input");
-                choice = GetCommand ();
-                answer = HandleCommand (choice, description);
-                if (answer == room2)
-                    Room2 ();
-                if (answer == room4)
-                    Room4 ();
-                if (answer == room8)
-                    Room8 ();
-            }
-
-           
-        }
-        static void Room2 () //left 3, up 6, right 1, down deadend
-        {
-            string room3 = s_left;
-            string room6 = s_up;
-            string room1 = s_right;
-            Console.WriteLine ("You've entered room 2!");
-            Console.WriteLine ($" left {s_left}");
-            string description = "This is the description of this dank place";
-            Console.WriteLine (description);
-            string choice = GetCommand ();
-            string answer = HandleCommand (choice, description);
-            Console.WriteLine ($"\n left {s_left} answer {answer} right {s_right}");
-            if (answer == "left")
-                Room3 ();
             else if (answer == "up")
-                Room6 ();
+            {
+                ChangeDirection(answer);
+                Room4 ();
+            }
             else if (answer == "right")
-                Room1 ();
+            {
+                ChangeDirection(answer);
+                Room8 ();
+            }
             while (answer != "left" && answer != "up" && answer != "right")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
                 choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
-                    Room3 ();
+                {
+                    ChangeDirection(answer);
+                    Room2 ();
+                }
                 else if (answer == "up")
-                    Room6 ();
+                {
+                    ChangeDirection(answer);
+                    Room4 ();
+                }
                 else if (answer == "right")
-                    Room1 ();
+                {
+                    ChangeDirection(answer);
+                    Room8 ();
+                }
+            } 
+        }
+        static void Room2 () //left 3, up 6, right 1, down deadend
+        {
+            /*string room3 = s_left;
+            string room6 = s_up;
+            string room1 = s_right;*/
+            Console.WriteLine ("You've entered room 2!");
+            Console.WriteLine ($" left {s_left}");
+            string description = "This is the description of this dank place.\nYou are facing " + s_up +
+                ". There are pathways to your " + s_left + ", " + s_up + ", and " + s_right + ".\n";
+            Console.WriteLine (description);
+            string choice = GetCommand ();
+            string answer = HandleCommand (choice, description);
+            Console.WriteLine ($"\n left {s_left} answer {answer} right {s_right}");
+            if (answer == "left")
+            {
+                ChangeDirection(answer);
+                Room3 ();
             }
-
+            else if (answer == "up")
+            {
+                ChangeDirection(answer);
+                Room6 ();
+            }
+            else if (answer == "right")
+            {
+                ChangeDirection(answer);
+                Room1 ();
+            }
+            while (answer != "left" && answer != "up" && answer != "right")
+            {
+                Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
+                answer = HandleCommand (choice, description);
+                if (answer == "left")
+                {
+                    ChangeDirection(answer);
+                    Room3 ();
+                }
+                else if (answer == "up")
+                {
+                    ChangeDirection(answer);
+                    Room6 ();
+                }
+                else if (answer == "right")
+                {
+                    ChangeDirection(answer);
+                    Room1 ();
+                }
+            }
         }
         static void Room3 () // right 2, deadend else
         {
-            string room2 = s_left;
+            //string room2 = s_right;
             Console.WriteLine ("You've entered room 3!");
-            string description = "This is the description of this dank place";
+            string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
+                " There are pathways to your " + s_right + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
             if (answer == room2)
+            {
+                ChangeDirection(answer);
                 Room2 ();
-            while (answer != room2)
+            }
+            while (answer != "right")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
                 answer = HandleCommand (choice, description);
-                if (answer == room2)
+                if (answer == "right")
+                {
+                    ChangeDirection(answer);
                     Room2 ();
+                }
             }
         }
         static void Room4 () //down 1, right 9, up 5, deadend else
         {
-            string room9 = s_right;
+            /*string room9 = s_right;
             string room1 = s_down;
-            string room5 = s_up;
+            string room5 = s_up;*/
             Console.WriteLine ("You've entered room 4!");
             string description = "This is the description of this dank place";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
-            if (answer == room9)
+            if (answer == "right")
+            {
+                ChangeDirection(answer);
                 Room9 ();
-            else if (answer == room1)
+            }
+            else if (answer == "down")
+            {
+                ChangeDirection(answer);
                 Room1 ();
-            else if (answer == room5)
+            }
+            else if (answer == "up")
+            {
+                ChangeDirection(answer);
                 Room5 ();
-            while (answer != room9 && answer != room5 && answer != room1)
+            }
+            while (answer != "right" && answer != "down" && answer != "up")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
                 answer = HandleCommand (choice, description);
-                if (answer == room9)
+                if (answer == "right")
+                {
+                    ChangeDirection(answer);
                     Room9 ();
-                else if (answer == room1)
+                }
+                else if (answer == "down")
+                {
+                    ChangeDirection(answer);
                     Room1 ();
-                else if (answer == room5)
-                    Room5 ();
+                }
+                else if (answer == "up")
+                {
+                    ChangeDirection(answer);
+                    room5 ();
+                }
             }
 
         }
