@@ -13,22 +13,18 @@ namespace Itse1430.Maze
     
     class Program
     {
-        //enum directions { left, up, right, down };
         static void Main(string[] args)
         {
             Room1 ();
         }
 
+        static void FacingDirection()
+        {
+
+        }
         static void ChangeDirection(string answer)
         {
-            if (answer == "left")
-                s_left = "up"; s_down = "left"; s_right = "down"; s_up = "right";
-            if (answer == "right")
-                s_right = "up"; s_down = "right"; s_left = "down"; s_up = "left";
-            if (answer == "down")
-                s_down = "up"; s_up = "down"; s_left = "right"; s_right = "down";
-            if (answer == "up")
-                s_up = "up"; s_down = "down"; s_left = "left"; s_right = "right";
+           
         }
 
         static string GetCommand()
@@ -66,7 +62,7 @@ namespace Itse1430.Maze
                         s_down = s_right;
                         s_right = s_up;
                         s_up = holder;
-                        Console.WriteLine ($" {s_left} (left) is now west, {s_down} is now south, {s_right} is now east, {s_up} is now north");
+                        Console.WriteLine ($"\n {s_left} points west, {s_down} points north, {s_right} points east, {s_up} points south");
                         break;
                     case "turn right":
                         holder = s_right;
@@ -74,9 +70,9 @@ namespace Itse1430.Maze
                         s_down = s_left;
                         s_left = s_up;
                         s_up = holder;
-                        Console.WriteLine ($" {s_left} is now west, {s_down} is now south, {s_right} is now east, {s_up} is now north");
+                        Console.WriteLine ($"\n {s_left} points west, {s_down} points north, {s_right} points east, {s_up} points south");
                         break;
-                    case "move left": Console.WriteLine (s_left);
+                    case "move left": 
                         return s_left;
                     case "move down":
                         return s_down;
@@ -101,7 +97,7 @@ namespace Itse1430.Maze
                 " Rapture has fallen into chaos, in part due to the \nmental instability that resulted from excessive gene-splicing. "+
                 "Your goal is to escape Rapture. \nThere is a room with a bathysphere, which will carry you back to the surface."+
                 "\nYou find yourself in the welcome lobby. Loose rubble is scattered across the flooded floor, \nwater leaking from cracked windows and busted pipes. " +
-                "\n\nYou are currently facing " + s_up + ". There are pathways to your " + s_left + ", " + s_up + ", and " + s_right +".\n"
+                "\n\nYou are currently facing " + s_up + ". There are pathways to your " + s_left + ", " + s_up + ", and " + s_right +".\n";
 
             Console.WriteLine (description);
             
@@ -109,7 +105,7 @@ namespace Itse1430.Maze
             string answer = HandleCommand (choice, description);
             if (answer == "left")
             {
-                Console.WriteLine (room2);
+                ChangeDirection (answer);
                 Room2 ();
             }
             else if (answer == "up")
@@ -124,7 +120,7 @@ namespace Itse1430.Maze
             }
             while (answer != "left" && answer != "up" && answer != "right")
             {
-                Console.WriteLine ("That's a deadend! Please enter a valid input");
+                Console.WriteLine ("\nThat's a deadend! Please enter a valid input");
                 choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
@@ -199,11 +195,11 @@ namespace Itse1430.Maze
             //string room2 = s_right;
             Console.WriteLine ("You've entered room 3!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_right + ".\n";
+                ". There are pathways to your " + s_right + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
-            if (answer == room2)
+            if (answer == "right")
             {
                 ChangeDirection(answer);
                 Room2 ();
@@ -211,6 +207,7 @@ namespace Itse1430.Maze
             while (answer != "right")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
@@ -226,7 +223,7 @@ namespace Itse1430.Maze
             string room5 = s_up;*/
             Console.WriteLine ("You've entered room 4!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", " + s_right + ", and " + s_up + ".\n";
+                ". There are pathways to your " + s_down + ", " + s_right + ", and " + s_up + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -248,6 +245,7 @@ namespace Itse1430.Maze
             while (answer != "right" && answer != "down" && answer != "up")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
@@ -262,7 +260,7 @@ namespace Itse1430.Maze
                 else if (answer == "up")
                 {
                     ChangeDirection(answer);
-                    room5 ();
+                    Room5 ();
                 }
             }
 
@@ -271,7 +269,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 5!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", " + s_left + ", " + s_right + ", and " + s_up + ".\n";
+                ". There are pathways to your " + s_down + ", " + s_left + ", " + s_right + ", and " + s_up + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -298,6 +296,7 @@ namespace Itse1430.Maze
             while (answer != "right" && answer != "down" && answer != "up" && answer != "left")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
@@ -312,12 +311,12 @@ namespace Itse1430.Maze
                 else if (answer == "up")
                 {
                     ChangeDirection(answer);
-                    room12 ();
+                    Room12 ();
                 }
                 else if (answer == "left")
                 {
                     ChangeDirection(answer);
-                    room6 ();
+                    Room6 ();
                 }
             }
         }
@@ -325,7 +324,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 6!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", " + s_right + ", and " + s_up + ".\n";
+                ". There are pathways to your " + s_down + ", " + s_right + ", and " + s_up + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -347,6 +346,7 @@ namespace Itse1430.Maze
             while (answer != "right" && answer != "down" && answer != "up")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
@@ -361,7 +361,7 @@ namespace Itse1430.Maze
                 else if (answer == "up")
                 {
                     ChangeDirection(answer);
-                    room7 ();
+                    Room7 ();
                 }
             }
         }
@@ -369,7 +369,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 7!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", and " + s_right + ".\n";
+                ". There are pathways to your " + s_down + ", and " + s_right + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -387,6 +387,7 @@ namespace Itse1430.Maze
             while (answer != "right" && answer != "down")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
@@ -404,7 +405,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 8!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_left + ", and " + s_up + ".\n";
+                ". There are pathways to your " + s_left + ", and " + s_up + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -422,6 +423,9 @@ namespace Itse1430.Maze
             while (answer != "left" && answer != "up")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                Console.WriteLine ($"{choice}");
+                choice = GetCommand ();
+                Console.WriteLine ($"{choice}");
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
                 {
@@ -439,7 +443,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 9!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", " + s_left + ", and " + s_up + ".\n";
+                ". There are pathways to your " + s_down + ", " + s_left + ", and " + s_up + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -461,6 +465,7 @@ namespace Itse1430.Maze
             while (answer != "left" && answer != "down" && answer != "up")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
                 {
@@ -475,7 +480,7 @@ namespace Itse1430.Maze
                 else if (answer == "up")
                 {
                     ChangeDirection(answer);
-                    room10 ();
+                    Room10 ();
                 }
             }
         }
@@ -483,7 +488,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 10!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", " + s_left + ", " + s_right + ", and " + s_up + ".\n";
+                ". There are pathways to your " + s_down + ", " + s_left + ", " + s_right + ", and " + s_up + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -510,6 +515,7 @@ namespace Itse1430.Maze
             while (answer != "right" && answer != "down" && answer != "up" && answer != "left")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
@@ -524,12 +530,12 @@ namespace Itse1430.Maze
                 else if (answer == "up")
                 {
                     ChangeDirection(answer);
-                    room11 ();
+                    Room11 ();
                 }
                 else if (answer == "left")
                 {
                     ChangeDirection(answer);
-                    room5 ();
+                    Room5 ();
                 }
             }
         }
@@ -537,7 +543,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 11!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", " + s_left + ", and " + s_right + ".\n";
+                ". There are pathways to your " + s_down + ", " + s_left + ", and " + s_right + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -559,6 +565,7 @@ namespace Itse1430.Maze
             while (answer != "left" && answer != "down" && answer != "right")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
                 {
@@ -573,7 +580,7 @@ namespace Itse1430.Maze
                 else if (answer == "right")
                 {
                     ChangeDirection(answer);
-                    room14 ();
+                    Room14 ();
                 }
             }
         }
@@ -581,7 +588,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 12!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", " + s_left + ", and " + s_right + ".\n";
+                ". There are pathways to your " + s_down + ", " + s_left + ", and " + s_right + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -603,6 +610,7 @@ namespace Itse1430.Maze
             while (answer != "left" && answer != "down" && answer != "right")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
                 {
@@ -617,7 +625,7 @@ namespace Itse1430.Maze
                 else if (answer == "right")
                 {
                     ChangeDirection(answer);
-                    room11 ();
+                    Room11 ();
                 }
             }
         }
@@ -625,7 +633,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 13!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", " + s_left + ", and " + s_up + ".\n";
+                ". There are pathways to your " + s_down + ", " + s_left + ", and " + s_up + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -647,6 +655,7 @@ namespace Itse1430.Maze
             while (answer != "left" && answer != "down" && answer != "up")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
                 {
@@ -661,7 +670,7 @@ namespace Itse1430.Maze
                 else if (answer == "up")
                 {
                     ChangeDirection(answer);
-                    room14 ();
+                    Room14 ();
                 }
             }
         }
@@ -669,7 +678,7 @@ namespace Itse1430.Maze
         {
             Console.WriteLine ("You've entered room 14!");
             string description = "This is the description of this dank place. \nYou are currently facing " + s_up + 
-                " There are pathways to your " + s_down + ", and" + s_left + ".\n";
+                ". There are pathways to your " + s_down + ", and" + s_left + ".\n";
             Console.WriteLine (description);
             string choice = GetCommand ();
             string answer = HandleCommand (choice, description);
@@ -687,6 +696,7 @@ namespace Itse1430.Maze
             while (answer != "left" && answer != "down")
             {
                 Console.WriteLine ("That's a deadend! Please enter a valid input");
+                choice = GetCommand ();
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
                 {
