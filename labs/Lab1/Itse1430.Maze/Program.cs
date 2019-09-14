@@ -21,20 +21,23 @@ namespace Itse1430.Maze
             Room1 ();
         }
 
-        static void ChangeDirection(string answer) //use pointers
+        static void LookDirection() 
         {
-
+            s_facingLeft = s_left;
+            s_facingRight = s_right;
+            s_facingForward = s_forward;
+            s_facingBackward = s_backward;
         }
 
         static string GetCommand()
         {
-            Console.WriteLine ("\nPlease enter a command. You may either enter 'move' followed by a direction, \n'turn' followed by either right, left, or around, or 'look' to get a description of where you are: ");
+            Console.Write ("\nPlease enter a command. You may either enter 'move' followed by a direction, \n'turn' followed by either right, left, or around, or 'look' to get a description of where you are: ");
             s_command = Console.ReadLine ();
             s_command = s_command.ToLower();
 
             while (s_command != "turn left" && s_command!= "turn right" && s_command != "turn around" && s_command != "move forward" && s_command != "move backward" && s_command != "move left" && s_command != "move right" && s_command != "look")
             {
-                Console.WriteLine ("Invalid input. You may either enter 'move' followed by a direction, \n'turn' followed by right, left, or around, or 'look' to get a description of where you are: ");
+                Console.Write ("Invalid input. You may either enter 'move' followed by a direction, \n'turn' followed by right, left, or around, or 'look' to get a description of where you are: ");
                 s_command = Console.ReadLine ();
                 s_command = s_command.ToLower ();
             }
@@ -58,7 +61,7 @@ namespace Itse1430.Maze
                         s_backward = s_right;
                         s_right = s_forward;
                         s_forward = holder;
-                        Console.WriteLine ($"\n {s_left} points west, {s_backward} points south, {s_right} points east, {s_forward} points north");
+                        Console.WriteLine ($"\n{s_left} points west, {s_backward} points south, {s_right} points east, {s_forward} points north");
                         break;
                     case "turn right":
                         holder = s_right;
@@ -66,7 +69,7 @@ namespace Itse1430.Maze
                         s_backward = s_left;
                         s_left = s_forward;
                         s_forward = holder;
-                        Console.WriteLine ($"\n {s_left} points west, {s_backward} points south, {s_right} points east, {s_forward} points north");
+                        Console.WriteLine ($"\n{s_left} points west, {s_backward} points south, {s_right} points east, {s_forward} points north");
                         break;
                     case "turn around":
                         holder = s_right;
@@ -75,7 +78,7 @@ namespace Itse1430.Maze
                         holder = s_forward;
                         s_forward = s_backward;
                         s_backward = holder;
-                        Console.WriteLine ($"\n {s_left} points west, {s_backward} points south, {s_right} points east, {s_forward} points north");
+                        Console.WriteLine ($"\n{s_left} points west, {s_backward} points south, {s_right} points east, {s_forward} points north");
                         break;
                     case "move left": 
                         return s_left;
@@ -95,9 +98,10 @@ namespace Itse1430.Maze
 
         static void Room1 ()
         {
-            string description ="\nYou find yourself in the welcome lobby. Loose rubble is scattered across the flooded floor, \nwater leaking from cracked windows and busted pipes. \n";
-                
-            string direction = "\nYou are currently facing " + s_forward + ". There are pathways to your " + s_left + ", " + s_forward + ", and " + s_right +".\n";
+            string description ="\nYou find yourself in the welcome lobby. Loose rubble is scattered across the flooded floor, \nwater leaking from cracked windows and busted pipes. \n" +
+                "\nYou are currently facing " + s_forward + ". There are pathways to your " + s_left + ", " + s_forward + ", and " + s_right +".\n";
+
+            string direction = "\nYou are currently facing " + s_facingForward + ". There are pathways to your " + s_facingLeft + ", " + s_facingForward + ", and " + s_facingRight +".\n";
 
             Console.WriteLine (description);
             
@@ -105,17 +109,14 @@ namespace Itse1430.Maze
             string answer = HandleCommand (choice, direction);
             if (answer == "left")     
             {
-                ChangeDirection (answer);
                 Room2 ();
             }
             else if (answer == "forward")
             {
-                ChangeDirection(answer);
                 Room4 ();
             }
             else if (answer == "right")
             {
-                ChangeDirection(answer);
                 Room8 ();
             }
             while (answer != "left" && answer != "forward" && answer != "right")
@@ -125,24 +126,21 @@ namespace Itse1430.Maze
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
                 {
-                    ChangeDirection(answer);
                     Room2 ();
                 }
                 else if (answer == "forward")
                 {
-                    ChangeDirection(answer);
                     Room4 ();
                 }
                 else if (answer == "right")
                 {
-                    ChangeDirection(answer);
                     Room8 ();
                 }
             } 
         }
         static void Room2 () //left 3, up 6, right 1, down deadend
         {
-            Console.WriteLine ("You've entered room 2!");
+            Console.WriteLine ("You've entered room 2!\n");
             string description = "This is the description of this dank place.\nYou are facing " + s_forward +
                 ". There are pathways to your " + s_left + ", " + s_forward + ", and " + s_right + ".\n";
             Console.WriteLine (description);
@@ -150,17 +148,14 @@ namespace Itse1430.Maze
             string answer = HandleCommand (choice, description);
             if (answer == "left")
             {
-                ChangeDirection(answer);
                 Room3 ();
             }
             else if (answer == "forward")
             {
-                ChangeDirection(answer);
                 Room6 ();
             }
             else if (answer == "right")
             {
-                ChangeDirection(answer);
                 Room1 ();
             }
             while (answer != "left" && answer != "forward" && answer != "right")
@@ -170,17 +165,14 @@ namespace Itse1430.Maze
                 answer = HandleCommand (choice, description);
                 if (answer == "left")
                 {
-                    ChangeDirection(answer);
                     Room3 ();
                 }
                 else if (answer == "forward")
                 {
-                    ChangeDirection(answer);
                     Room6 ();
                 }
                 else if (answer == "right")
                 {
-                    ChangeDirection(answer);
                     Room1 ();
                 }
             }
@@ -195,7 +187,6 @@ namespace Itse1430.Maze
             string answer = HandleCommand (choice, description);
             if (answer == "right")
             {
-                ChangeDirection(answer);
                 Room2 ();
             }
             while (answer != "right")
@@ -205,7 +196,6 @@ namespace Itse1430.Maze
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
-                    ChangeDirection(answer);
                     Room2 ();
                 }
             }
@@ -220,17 +210,14 @@ namespace Itse1430.Maze
             string answer = HandleCommand (choice, description);
             if (answer == "right")
             {
-                ChangeDirection(answer);
                 Room9 ();
             }
             else if (answer == "backward")
             {
-                ChangeDirection(answer);
                 Room1 ();
             }
             else if (answer == "forward")
             {
-                ChangeDirection(answer);
                 Room5 ();
             }
             while (answer != "right" && answer != "backward" && answer != "forward")
@@ -240,17 +227,14 @@ namespace Itse1430.Maze
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
-                    ChangeDirection(answer);
                     Room9 ();
                 }
                 else if (answer == "backward")
                 {
-                    ChangeDirection(answer);
                     Room1 ();
                 }
                 else if (answer == "forward")
                 {
-                    ChangeDirection(answer);
                     Room5 ();
                 }
             }
@@ -266,22 +250,18 @@ namespace Itse1430.Maze
             string answer = HandleCommand (choice, description);
             if (answer == "right")
             {
-                ChangeDirection(answer);
                 Room10 ();
             }
             else if (answer == "backward")
             {
-                ChangeDirection(answer);
                 Room4 ();
             }
             else if (answer == "forward")
             {
-                ChangeDirection(answer);
                 Room12 ();
             }
             else if (answer == "left")
             {
-                ChangeDirection(answer);
                 Room6 ();
             }
             while (answer != "right" && answer != "backward" && answer != "forward" && answer != "left")
@@ -291,22 +271,18 @@ namespace Itse1430.Maze
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
-                    ChangeDirection(answer);
                     Room10 ();
                 }
                 else if (answer == "backward")
                 {
-                    ChangeDirection(answer);
                     Room4 ();
                 }
                 else if (answer == "forward")
                 {
-                    ChangeDirection(answer);
                     Room12 ();
                 }
                 else if (answer == "left")
                 {
-                    ChangeDirection(answer);
                     Room6 ();
                 }
             }
@@ -321,17 +297,14 @@ namespace Itse1430.Maze
             string answer = HandleCommand (choice, description);
             if (answer == "right")
             {
-                ChangeDirection(answer);
                 Room5 ();
             }
             else if (answer == "backward")
             {
-                ChangeDirection(answer);
                 Room2 ();
             }
             else if (answer == "forward")
             {
-                ChangeDirection(answer);
                 Room7 ();
             }
             while (answer != "right" && answer != "backward" && answer != "forward")
@@ -341,17 +314,14 @@ namespace Itse1430.Maze
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
-                    ChangeDirection(answer);
                     Room5 ();
                 }
                 else if (answer == "backward")
                 {
-                    ChangeDirection(answer);
                     Room2 ();
                 }
                 else if (answer == "forward")
                 {
-                    ChangeDirection(answer);
                     Room7 ();
                 }
             }
@@ -366,12 +336,10 @@ namespace Itse1430.Maze
             string answer = HandleCommand (choice, description);
             if (answer == "right")
             {
-                ChangeDirection(answer);
                 Room12 ();
             }
             else if (answer == "backward")
             {
-                ChangeDirection(answer);
                 Room6 ();
             }
 
@@ -382,12 +350,10 @@ namespace Itse1430.Maze
                 answer = HandleCommand (choice, description);
                 if (answer == "right")
                 {
-                    ChangeDirection(answer);
                     Room12 ();
                 }
                 else if (answer == "backward")
                 {
-                    ChangeDirection(answer);
                     Room6 ();
                 }
             }
@@ -669,5 +635,10 @@ namespace Itse1430.Maze
         static string s_backward = "backward";
         static string s_right = "right";
         static string s_left = "left";
+        
+        static string s_facingLeft = "";
+        static string s_facingRight = "";
+        static string s_facingForward = "";
+        static string s_facingBackward = "";
     }
 }
