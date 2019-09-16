@@ -49,7 +49,8 @@ namespace Itse1430.Maze
                 {
                     case "":
                     break;
-                    case "look":
+                    case "look": //Each room has a certain number of exits that are in certain directions. 
+                                //These if statements tract what direction the user is facing and the direction of the exits respective of the user's direction
                     if (roomNumber == 1)
                         Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", " + s_exitForward + ", and " + s_exitRight + ".");
                     if (roomNumber == 2)
@@ -79,7 +80,7 @@ namespace Itse1430.Maze
                     if (roomNumber == 14)
                         Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", and " + s_exitBackward + ".");
                     break;
-                    case "turn left":
+                    case "turn left": //swaps the values of the user direction and exit direction variables to the left
                     holder = s_left;
                     s_left = s_backward;
                     s_backward = s_right;
@@ -92,7 +93,7 @@ namespace Itse1430.Maze
                     s_exitBackward = exitHolder;
                     Console.WriteLine ($"\nYou have turned left.");
                     break;
-                    case "turn right":
+                    case "turn right": //swaps the values of the user direction and exit direction variables to the right
                     holder = s_right;
                     s_right = s_backward;
                     s_backward = s_left;
@@ -105,13 +106,19 @@ namespace Itse1430.Maze
                     s_exitForward = exitHolder;
                     Console.WriteLine ($"\nYou have turned right.");
                     break;
-                    case "turn around":
+                    case "turn around": //swaps the values of the user direction and exit direction variables, left with right and forward with backward
                     holder = s_right;
                     s_right = s_left;
                     s_left = holder;
                     holder = s_forward;
                     s_forward = s_backward;
                     s_backward = holder;
+                    exitHolder = s_exitLeft;
+                    s_exitLeft = s_exitRight;
+                    s_exitRight = exitHolder;
+                    exitHolder = s_exitForward;
+                    s_exitForward = s_exitBackward;
+                    s_exitBackward = exitHolder;
                     Console.WriteLine ($"\nYou have turned around.");
                     break;
                     case "move left":
@@ -122,7 +129,7 @@ namespace Itse1430.Maze
                     return s_right;
                     case "move forward":
                     return s_forward;
-                    case "quit":
+                    case "quit": //below is the quit switch that allows the user to exit the program
                     Console.Write ("\nAre you sure you want to quit? Yes/No: ");
                     quitter = Console.ReadLine ();
                     quitter = quitter.ToLower ();
@@ -147,6 +154,7 @@ namespace Itse1430.Maze
 
         static void Room1 ()
         {
+            //every room has its own room number and description
             int roomNumber = 1;
             string description = "\nYou find yourself in the Lounge. This room connects the Bathysphere Station with " +
                 "\nthe rest of rapture. People would rest before or after their travels to and from Rapture. \nLoose rubble is scattered across the flooded floor, \nwater leaking from cracked windows and busted pipes. \n" +
@@ -157,6 +165,7 @@ namespace Itse1430.Maze
             string choice = GetCommand (); //gets the command
             string answer = HandleCommand (choice, roomNumber); //passes the command and room number to the command handle function
 
+            //the only exits available for this room are left, forward, and right
             if (answer == "left")
                 Room2 ();
             else if (answer == "forward")
