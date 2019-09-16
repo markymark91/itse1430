@@ -191,7 +191,7 @@ namespace Itse1430.Maze
         {
             int roomNumber = 2;
             Console.WriteLine ("You've entered room 2!\n");
-            string description = "The Medical Pavilion has many advertisements for Steinman's surgery operations and" +
+            string description = "\nThe Medical Pavilion has many advertisements for Steinman's surgery operations and" +
                 " other services in Rapture. \nThis place was once operated by Doctor Steinman, and is now ruled by him." +
                 "\nThe walls are covered in messaged painted in the blood of his former patients and those foolish enough to oppose him.\n";
             
@@ -224,7 +224,7 @@ namespace Itse1430.Maze
         {
             int roomNumber = 3;
             Console.WriteLine ("You've entered room 3!");
-            string description = "The Metro Station, once a bustling and lively area, now vacant save for some rats." +
+            string description = "\nThe Metro Station, once a bustling and lively area, now vacant save for some rats." +
                 "\nconvicted criminals were publicly displayed to dismay any who would distrupt the peace." +
                 "\nThe Metro Station isn't operational, and so the only way to go is back.\n"; 
             Console.WriteLine (description);
