@@ -175,7 +175,7 @@ namespace Itse1430.Maze
 
             while (answer != "left" && answer != "forward" && answer != "right") //If the user tries to input a direction that has no adjoining room
             {
-                Console.WriteLine ("\nThat's a deadend! Please enter a valid input");
+                Console.WriteLine ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -190,7 +190,6 @@ namespace Itse1430.Maze
         static void Room2 () //left 3, up 6, right 1, down deadend
         {
             int roomNumber = 2;
-            Console.WriteLine ("You've entered room 2!\n");
             string description = "\nThe Medical Pavilion has many advertisements for Steinman's surgery operations and" +
                 " other services in Rapture. \nThis place was once operated by Doctor Steinman, and is now ruled by him." +
                 "\nThe walls are covered in messaged painted in the blood of his former patients and those foolish enough to oppose him.\n";
@@ -208,7 +207,7 @@ namespace Itse1430.Maze
 
             while (answer != "left" && answer != "forward" && answer != "right")
             {
-                Console.WriteLine ("That's a deadend! Please enter a valid input");
+                Console.WriteLine ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -223,7 +222,6 @@ namespace Itse1430.Maze
         static void Room3 () // right 2, deadend else
         {
             int roomNumber = 3;
-            Console.WriteLine ("You've entered room 3!");
             string description = "\nThe Metro Station, once a bustling and lively area, now vacant save for some rats." +
                 "\nconvicted criminals were publicly displayed to dismay any who would distrupt the peace." +
                 "\nThe Metro Station isn't operational, and so the only way to go is back.\n"; 
@@ -235,7 +233,7 @@ namespace Itse1430.Maze
             
             while (answer != "right")
             {
-                Console.WriteLine ("That's a deadend! Please enter a valid input");
+                Console.WriteLine ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -246,8 +244,7 @@ namespace Itse1430.Maze
         static void Room4 () //down 1, right 9, up 5, deadend else
         {
             int roomNumber = 4;
-            Console.WriteLine ("\nYou've entered room 4!");
-            string description = "\nDue to the collapse of the city, you've discovered the Smuggler's Hideout." +
+            string description = "\nSmuggler's Hideout, once hidden from the public, is now reachable due to the collapse of the city." +
                 "\nThis is where the smugglers and criminals did their business: alcohol, tobacco, beef, even bibles." +
                 "\nThe hideout is connected to several areas, allowing greater freedom for their operations.\n";
             Console.WriteLine (description);
@@ -262,7 +259,7 @@ namespace Itse1430.Maze
 
             while (answer != "right" && answer != "backward" && answer != "forward")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -278,9 +275,8 @@ namespace Itse1430.Maze
         static void Room5 ()//down 4, left 6, up 12, right 10
         {
             int roomNumber = 5;
-            Console.WriteLine ("\nYou've entered room 5!");
             string description = "\nArcadia is the oxygen supplier of Rapture." +
-                "\nFull of forests and other plant life, this location was excellent for those seeking refuge." +
+                "\nFull of forests and other plant life, this location was the best place for those seeking refuge." +
                 "\nFarms and markets that were once as full of life as the environment are now torched and burned to the ground.\n"; 
             Console.WriteLine (description);
             string choice = GetCommand ();
@@ -296,7 +292,7 @@ namespace Itse1430.Maze
 
             while (answer != "right" && answer != "backward" && answer != "forward" && answer != "left")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -313,7 +309,6 @@ namespace Itse1430.Maze
         static void Room6 ()//down 2, right 5, up 7
         {
             int roomNumber = 6;
-            Console.WriteLine ("\nYou've entered room 6!");
             string description = "\nWorley Winery has been ransacked of all its wine." +
                 "\nEmpty wine racks, barrels, and bottles liter the floor. " +
                 "\nThe distillery below ground has been destroyed.\n";
@@ -329,7 +324,7 @@ namespace Itse1430.Maze
 
             while (answer != "right" && answer != "backward" && answer != "forward")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -344,7 +339,6 @@ namespace Itse1430.Maze
         static void Room7 ()//down 6, right 12
         {
             int roomNumber = 7;
-            Console.WriteLine ("\nYou've entered room 7!");
             string description = "\nFort Frolic was where Rapture's citizens came to relax and unwind." +
                 "\nA plethora of avenues for film, music, gambling, and strip clubs were available to those who could afford it." +
                 "\nNow this place is full of twisted and macabre works, signifying the peoples' decent into madness.\n"; 
@@ -358,7 +352,7 @@ namespace Itse1430.Maze
 
             while (answer != "right" && answer != "backward")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -371,7 +365,6 @@ namespace Itse1430.Maze
         static void Room8 ()//left 1, up 9
         {
             int roomNumber = 8;
-            Console.WriteLine ("\nYou've entered room 8!");
             string description = "\nHephaestus is the power facility for Rapture. Using volcanic vents, Rapture had limitless power." +
                 "\nOnce the deline of Rapture began, the facility would be frequently assaulted by those wanting the power for themselves." +
                 "\nHephaestus is populated with the bodies of those who once worked within its walls.\n"; 
@@ -385,7 +378,7 @@ namespace Itse1430.Maze
 
             while (answer != "left" && answer != "forward")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -398,8 +391,7 @@ namespace Itse1430.Maze
         static void Room9 ()//down 8, left 4, up 10
         {
             int roomNumber = 9;
-            Console.WriteLine ("\nYou've entered room 9!");
-            string description = "\nThis is the Rapture Central Control station" +
+            string description = "\nRapture Central Control station is at the heart of Hephaestus." +
                 "\nThis fortress was unbreachable during the attacks on Hephaestus," +
                 "\nand is the most untouched location in all of Rapture\n.";
             Console.WriteLine (description);
@@ -414,7 +406,7 @@ namespace Itse1430.Maze
 
             while (answer != "left" && answer != "backward" && answer != "forward")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -429,7 +421,6 @@ namespace Itse1430.Maze
         static void Room10 ()//down 9, left 5, up 11, right 13
         {
             int roomNumber = 10;
-            Console.WriteLine ("\nYou've entered room 10!");
             string description = "\nOlympus Heights was where the upper class once lived." +
                 "\nThe once beautiful district has been all but destroyed, glass and rubble covering the walkways." +
                 "\nMercury Suites is the only accessible location within the district, " +
@@ -448,7 +439,7 @@ namespace Itse1430.Maze
 
             while (answer != "right" && answer != "backward" && answer != "forward" && answer != "left")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -465,7 +456,6 @@ namespace Itse1430.Maze
         static void Room11 ()//down 10, left 12, right 14
         {
             int roomNumber = 11;
-            Console.WriteLine ("\nYou've entered room 11!");
             string description = "\nApollo Square was where the lower class residents once lived." +
                 "\nThis place wasn't hit as hard as Olympus Heights, but is still in terrible condition." +
                 "\nA demolished security checkpoint gives you accessibility to once obstructed areas\n"; 
@@ -481,7 +471,7 @@ namespace Itse1430.Maze
 
             while (answer != "left" && answer != "backward" && answer != "right")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -496,7 +486,6 @@ namespace Itse1430.Maze
         static void Room12 ()//down 5, left 7, right 11
         {
             int roomNumber = 12;
-            Console.WriteLine ("\nYou've entered room 12!");
             string description = "\nPoint Prometheus was where genetic experimentation took place, and where " +
                 "\nRapture's decent began. Plasmids that gave the populace it's superhuman powers and enhanced guards" +
                 "\nNamed Big Daddies were created here. The labs still have some plasmids lying about.\n"; 
@@ -512,7 +501,7 @@ namespace Itse1430.Maze
 
             while (answer != "left" && answer != "backward" && answer != "right")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -527,7 +516,6 @@ namespace Itse1430.Maze
         static void Room13 ()//left 10, up 14, down 15
         {
             int roomNumber = 13;
-            Console.WriteLine ("\nYou've entered room 13!");
             string description = "\nThe Proving Grounds was once a museum full of powerful imagery to Rapture's history and greatness." +
                 "\nNow, as its name implies, it's a training facility used by one of the factions \nduring the civil war to train their citizens for combat." +
                 "\nThe Gift Shop and Museum Lobby have been picked clean of anything useful.\n"; 
@@ -543,7 +531,7 @@ namespace Itse1430.Maze
 
             while (answer != "left" && answer != "backward" && answer != "forward")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -558,7 +546,6 @@ namespace Itse1430.Maze
         static void Room14 ()//left 11, down 13
         {
             int roomNumber = 14;
-            Console.WriteLine ("\nYou've entered room 14!");
             string description = "\nFontaine's Lair is where one of the faction leaders resided." +
                 "\nA giant genetic mucation device lies in the center of the room." +
                 "\nThere is a giant monster on the floor in front of the device, already dead."; 
@@ -572,7 +559,7 @@ namespace Itse1430.Maze
 
             while (answer != "left" && answer != "backward")
             {
-                Console.Write ("\nThat's a deadend! Please enter a valid input: ");
+                Console.Write ("\nThat's a deadend! Please enter a valid input. ");
                 Console.WriteLine (description);
                 choice = GetCommand ();
                 answer = HandleCommand (choice, roomNumber);
@@ -584,7 +571,7 @@ namespace Itse1430.Maze
         }
         static void Room15 ()//END
         {
-            Console.WriteLine ("\nYou have reached the bathysphere! As you ascend back to the surface," +
+            Console.WriteLine ("\n* * * * * Congratulations! * * * * *\nYou have reached the bathysphere! As you ascend back to the surface," +
                 "\nyou can see Rapture is shrinking in the distance, it's horrors now behind you." +
                 "\nYou have completed the maze!");
         }
