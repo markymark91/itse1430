@@ -40,6 +40,7 @@ namespace Itse1430.Maze
         static string HandleCommand ( string choice, int roomNumber ) //Performs several different functions based on the user's command
         {
             string holder;
+            string exitHolder;
             string quitter;
 
             while (true)
@@ -50,33 +51,33 @@ namespace Itse1430.Maze
                     break;
                     case "look":
                     if (roomNumber == 1)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the west, north, and east.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", " + s_exitForward + ", and " + s_exitRight + ".");
                     if (roomNumber == 2)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the west, north, and east.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", " + s_exitForward + ", and " + s_exitRight + ".");
                     if (roomNumber == 3)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the east.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitRight + ".");
                     if (roomNumber == 4)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the south, east, and north.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitBackward + ", " + s_exitForward + ", and " + s_exitRight + ".");
                     if (roomNumber == 5)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to north, south, east, and west.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " +s_exitBackward + ", " + s_exitLeft + ", " + s_exitForward + ", and " + s_exitRight + ".");
                     if (roomNumber == 6)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the south, east, and north.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitBackward + ", " + s_exitForward + ", and " + s_exitRight + ".");
                     if (roomNumber == 7)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the south and east.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitBackward + ", and " + s_exitRight + ".");
                     if (roomNumber == 8)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the west and north.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", and " + s_exitForward + ".");
                     if (roomNumber == 9)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the south, west, and north.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", " + s_exitForward + ", and " + s_exitBackward + ".");
                     if (roomNumber == 10)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the north, south, east, and west.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitBackward + ", " + s_exitLeft + ", " + s_exitForward + ", and " + s_exitRight + ".");
                     if (roomNumber == 11)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the south, west, and east.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", " + s_exitBackward + ", and " + s_exitRight + ".");
                     if (roomNumber == 12)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the south, west, and east.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", " + s_exitBackward + ", and " + s_exitRight + ".");
                     if (roomNumber == 13)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the north, south, and west.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", " + s_exitForward + ", and " + s_exitBackward + ".");
                     if (roomNumber == 14)
-                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways to the south and west.");
+                        Console.WriteLine ("\nYou are currently facing " + s_forward + ". There are pathways are: " + s_exitLeft + ", and " + s_exitBackward + ".");
                     break;
                     case "turn left":
                     holder = s_left;
@@ -84,6 +85,11 @@ namespace Itse1430.Maze
                     s_backward = s_right;
                     s_right = s_forward;
                     s_forward = holder;
+                    exitHolder = s_exitLeft;
+                    s_exitLeft = s_exitForward;
+                    s_exitForward = s_exitRight;
+                    s_exitRight = s_exitBackward;
+                    s_exitBackward = exitHolder;
                     Console.WriteLine ($"\nYou have turned left.");
                     break;
                     case "turn right":
@@ -92,6 +98,11 @@ namespace Itse1430.Maze
                     s_backward = s_left;
                     s_left = s_forward;
                     s_forward = holder;
+                    exitHolder = s_exitLeft;
+                    s_exitLeft = s_exitBackward;
+                    s_exitBackward = s_exitRight;
+                    s_exitRight = s_exitForward;
+                    s_exitForward = exitHolder;
                     Console.WriteLine ($"\nYou have turned right.");
                     break;
                     case "turn around":
@@ -509,7 +520,7 @@ namespace Itse1430.Maze
             int roomNumber = 13;
             Console.WriteLine ("\nYou've entered room 13!");
             string description = "\nThe Proving Grounds was once a museum full of powerful imagery to Rapture's history and greatness." +
-                "\nNow, as its name implies, is a training facility used by one of the factions during the civil war to train their citizens for combat." +
+                "\nNow, as its name implies, it's a training facility used by one of the factions \nduring the civil war to train their citizens for combat." +
                 "\nThe Gift Shop and Museum Lobby have been picked clean of anything useful.\n"; 
             Console.WriteLine (description);
             string choice = GetCommand ();
@@ -575,5 +586,10 @@ namespace Itse1430.Maze
         static string s_backward = "backward";
         static string s_right = "right";
         static string s_left = "left";
+
+        static string s_exitForward = "forward";
+        static string s_exitBackward = "backward";
+        static string s_exitRight = "right";
+        static string s_exitLeft = "left";
     }
 }
