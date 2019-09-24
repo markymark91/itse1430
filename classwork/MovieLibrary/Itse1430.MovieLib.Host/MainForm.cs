@@ -12,12 +12,12 @@ namespace Itse1430.MovieLib.Host
             //Itse1430.MovieLib.Movie
 
             Movie movie = new Movie ();
-            movie.title = "Jaws";
-            movie.description = movie.title;
+            movie.Title = "Jaws";
+            movie.Description = movie.Title;
         }
 
         
-        private void AddToolStripMenuItem_Click ( object sender, EventArgs e )
+        private void OnMovieAdd ( object sender, EventArgs e )
         {
             var form = new MovieForm ();
 
@@ -31,5 +31,25 @@ namespace Itse1430.MovieLib.Host
         }
 
         private Movie _movie;
+
+        private void OnMovieEdit ( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnMovieDelete ( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnFileExit ( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnHelpAbout ( object sender, EventArgs e )
+        {
+
+        }
     }
 }
