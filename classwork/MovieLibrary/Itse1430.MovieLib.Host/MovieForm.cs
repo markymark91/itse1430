@@ -17,8 +17,24 @@ namespace Itse1430.MovieLib.Host
             InitializeComponent ();
         }
 
-        public Movie Movie;
-        private void BtnSave_Click ( object sender, EventArgs e )
+        //must be a property
+        public Movie Movie { get; set; }
+
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad (e);
+
+            if(Movie!= null)
+            {
+                _txtName.Text = Movie.Title;
+                txtDescription.Text = Movie.Description;
+                _txtReleaseYear.Text = Movie.ReleaseYear.ToString();
+                _txtRunLength.Text = Movie.RunLength.ToString();
+                cbRating.Text = Movie.Rating;
+                chkHasSeen.Checked = Movie.HasSeen;
+            };
+        }
+        private void OnSave ( object sender, EventArgs e )
         {
             var movie = new Movie ();
             //movie.set_title(_txtName.Text); below is same thing
