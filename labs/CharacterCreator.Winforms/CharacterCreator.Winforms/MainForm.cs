@@ -26,10 +26,6 @@ namespace CharacterCreator.Winforms
         {
             var form = new CharacterForm ();
 
-            //Modeless - does not block main window
-            //form.Show();
-
-            //Show the new movie form modally
             if (form.ShowDialog (this) == DialogResult.OK)
             {
                 AddCharacter (form.Character);
@@ -39,14 +35,7 @@ namespace CharacterCreator.Winforms
         private void UpdateUI ()
         {
             var characters = GetCharacters ();
-
-            /*Programmatic approach 
-            _lstMovies.Items.Clear ();
-            _lstMovies.Items.AddRange (movies);
-            */
-
             _lstCharacters.DataSource = characters;
-
         }
         private void AddCharacter ( Character character )
         {
@@ -60,6 +49,21 @@ namespace CharacterCreator.Winforms
                 };
             };
         }
+
+        private void RemoveCharacter ( Character character )
+        {
+            //Remove from array
+            for (var index = 0; index < _characters.Length; ++index)
+            {
+                //This won't work
+                if (_characters[index] == character)
+                {
+                    _characters[index] = null;
+                    return;
+                };
+            };
+        }
+
         private Character[] GetCharacters ()
         {
             //filter out empty movies
@@ -78,5 +82,31 @@ namespace CharacterCreator.Winforms
         }
 
         private Character[] _characters = new Character[100];
+
+        private void OnCharacterEdit ( object sender, EventArgs e )
+        {
+            //Get selected movie
+            var character = GetSelectedCharacter ();
+            if (character == null)
+                return;
+
+            var form = new CharacterForm ();
+            form.Text = "Edit Character";
+            form.Character = character;
+
+            if (form.ShowDialog (this) == DialogResult.OK)
+            {
+                //TODO: Change to update
+                RemoveCharacter (character);
+                //RemoveMovie (form.Movie);
+                AddCharacter (form.Character);
+                UpdateUI ();
+            };
+        }
+        private Character GetSelectedCharacter ()
+        {
+            var item = _lstCharacters.SelectedItem;
+            return item as Character;
+        }
     }
 }
