@@ -33,7 +33,29 @@ namespace Itse1430.MovieLib.Host
 
         private Movie GetSelectedMovie ()
         {
-            return _movies[0];
+            var item = _lstMovies.SelectedItem;
+            //if (item == null)
+            //    return null;
+            //return _movies[0];
+            //Movie or null
+            return item as Movie;
+
+            /*other approaches
+             * c-style cast
+             * (Movie)item;
+             * 
+             * if (item is Movie;)
+             * {
+             *  var i = (Movie)item;
+             *  //do something with movie
+             * }
+             */
+
+            /*pattern matching
+             * if(item is Movie movie)
+             * {
+             * };
+             */
         }
 
         private void OnMovieEdit ( object sender, EventArgs e )
@@ -50,6 +72,7 @@ namespace Itse1430.MovieLib.Host
             {
                 //TODO: Change to update
                 RemoveMovie (movie);
+                //RemoveMovie (form.Movie);
                 AddMovie (form.Movie);
                 UpdateUI ();
             };
@@ -57,6 +80,25 @@ namespace Itse1430.MovieLib.Host
 
         private void OnMovieDelete ( object sender, EventArgs e )
         {
+            //demo
+            var menuItem = sender as Button;
+            //this will crash if menuItem is null
+            //var text = menuItem.Text;
+
+            //handle null
+            var text = "";
+            if (menuItem != null)
+                text = menuItem.Text;
+            else
+                text = "";
+
+            //as expression
+            var text2 = (menuItem != null) ? menuItem.Text : "";
+
+            //null coalescing. menuItem ?? "";
+            //null conditional operator
+            var text3 = menuItem?.Text ?? "";
+
             var movie = GetSelectedMovie ();
             if (movie == null)
                 return;
@@ -87,7 +129,14 @@ namespace Itse1430.MovieLib.Host
         private void UpdateUI()
         {
             var movies = GetMovies ();
+
+            /*Programmatic approach 
+            _lstMovies.Items.Clear ();
             _lstMovies.Items.AddRange (movies);
+            */
+
+            _lstMovies.DataSource = movies;
+
         }
         private void AddMovie ( Movie movie )
         {
@@ -119,7 +168,18 @@ namespace Itse1430.MovieLib.Host
         private Movie[] GetMovies ()
         {
             //filter out empty movies
-            return _movies;
+            var count = 0;
+            foreach (var movie in _movies)
+                if (movie != null)
+                    ++count;
+
+            var index = 0;
+            var movies = new Movie[count];
+            foreach (var movie in _movies)
+                if (movie != null)
+                    movies[index++] = movie;
+
+            return movies;
         }
 
         private Movie[] _movies = new Movie[100];

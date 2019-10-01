@@ -64,6 +64,12 @@ namespace Itse1430.MovieLib
             private set { }
         }
 
+        public override string ToString()
+        {
+            return $"{Title} ({ReleaseYear})";
+            
+        }
+
         //Fields - data to be stored
         //never make fields public
         private string _title = "";

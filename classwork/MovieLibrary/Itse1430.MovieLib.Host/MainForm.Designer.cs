@@ -127,6 +127,7 @@
             // 
             // _lstMovies
             // 
+            this._lstMovies.DisplayMember = "Title";
             this._lstMovies.FormattingEnabled = true;
             this._lstMovies.Location = new System.Drawing.Point(12, 27);
             this._lstMovies.Name = "_lstMovies";
