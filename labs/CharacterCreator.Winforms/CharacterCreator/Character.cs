@@ -39,16 +39,19 @@ namespace CharacterCreator
             get { return ""; }
             private set { }
         }
+        public override string ToString ()
+        {
+            return $"{Race} {Profession} {Name}";
+
+        }
 
         //Fields - data to be stored
         //never make fields public
         private string _name = "";
         private string _profession = "";
-        //private int _releaseYear =1900;
         private string _race = "";
         private string _description = "";
-        //private bool _hasSeen;
-        //private int _runLength;
+
 
         /// <summary>Validates the movie.</summary>
         /// <returns>An error message if validation fails or empty string otherwise</returns>
@@ -59,7 +62,6 @@ namespace CharacterCreator
             //Name is required
             if (String.IsNullOrEmpty (this.Name))
                 return "Name is required";
- 
             if (Strength < 0 || Strength > 100)
                 return "Strength must be a number between 0 and 100";
             if (Dexterity < 0 || Dexterity > 100)
