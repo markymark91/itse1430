@@ -36,6 +36,8 @@ namespace Itse1430.MovieLib.Host
         }
         private void OnSave ( object sender, EventArgs e )
         {
+            if (!ValidateChildren ())
+                return;
             var movie = new Movie ();
             //movie.set_title(_txtName.Text); below is same thing
             movie.Title = _txtName.Text;
@@ -48,7 +50,10 @@ namespace Itse1430.MovieLib.Host
             //Validate
             var message = movie.Validate ();
             if (!String.IsNullOrEmpty (message))
+            {
+                MessageBox.Show (this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return; //TODO: Error
+            }
 
             //TODO: Save It
             Movie = movie;
@@ -68,6 +73,39 @@ namespace Itse1430.MovieLib.Host
         {
             DialogResult = DialogResult.Cancel;
             Close ();
+        }
+
+        private void OnValidatingName ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+
+            if (control.Text == "")
+                e.Cancel = true;
+        }
+
+        private void OnValidatingReleaseYear ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+
+            var value = GetAsInt32 (control);
+            if (value < 1900)
+                e.Cancel = true;
+        }
+
+        private void OnValidatingRunLength ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+
+            var value = GetAsInt32 (control);
+            if (value < 0)
+                e.Cancel = true;
+        }
+        private void OnValidatingRating ( object sender, CancelEventArgs e )
+        {
+            var control = sender as ComboBox;
+
+            if (control.SelectedText == "")
+                e.Cancel = true;
         }
     }
 }

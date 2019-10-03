@@ -39,6 +39,8 @@ namespace CharacterCreator.Winforms
 
         private void OnSave (object sender, EventArgs e)
         {
+            if (!ValidateChildren ())
+                return;
             var character = new Character ();
             character.Name = _txtName.Text;
             character.Description = _txtDescription.Text;
@@ -52,7 +54,10 @@ namespace CharacterCreator.Winforms
 
             var message = character.Validate ();
             if (!String.IsNullOrEmpty (message))
+            {
+                MessageBox.Show (this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
 
             Character = character;
 
@@ -73,5 +78,33 @@ namespace CharacterCreator.Winforms
             DialogResult = DialogResult.Cancel;
             Close ();
         }
+
+        private void OnValidatingName ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+
+            if (control.Text == "")
+            {
+                e.Cancel = true;
+                _errors.SetError (control, "Name is required");
+            }
+
+        }
     }
 }
+/*private void OnValidatingRunLength ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+
+            var value = GetAsInt32 (control);
+            if (value < 0)
+                e.Cancel = true;
+        }
+        private void OnValidatingRating ( object sender, CancelEventArgs e )
+        {
+            var control = sender as ComboBox;
+
+            if (control.SelectedText == "")
+                e.Cancel = true;
+        }
+*/
