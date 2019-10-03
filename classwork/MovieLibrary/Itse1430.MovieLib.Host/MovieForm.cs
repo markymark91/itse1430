@@ -80,7 +80,10 @@ namespace Itse1430.MovieLib.Host
             var control = sender as TextBox;
 
             if (control.Text == "")
+            {
                 e.Cancel = true;
+                _errors.SetError (control, "Name is required");
+            }
         }
 
         private void OnValidatingReleaseYear ( object sender, CancelEventArgs e )

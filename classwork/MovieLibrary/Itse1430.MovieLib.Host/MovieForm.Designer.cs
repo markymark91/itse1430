@@ -60,7 +60,6 @@
             this._txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this._errors.SetError(this._txtName, "Name is required");
             this._txtName.Location = new System.Drawing.Point(116, 28);
             this._txtName.Name = "_txtName";
             this._txtName.Size = new System.Drawing.Size(418, 20);
@@ -178,6 +177,7 @@
             // 
             // _errors
             // 
+            this._errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this._errors.ContainerControl = this;
             // 
             // MovieForm
