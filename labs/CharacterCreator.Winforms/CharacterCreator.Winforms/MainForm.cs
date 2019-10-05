@@ -108,5 +108,41 @@ namespace CharacterCreator.Winforms
             var item = _lstCharacters.SelectedItem;
             return item as Character;
         }
+
+        private void OnCharacterDelete ( object sender, EventArgs e )
+        {
+            //demo
+            var menuItem = sender as Button;
+            //this will crash if menuItem is null
+            //var text = menuItem.Text;
+
+            //handle null
+            var text = "";
+            if (menuItem != null)
+                text = menuItem.Text;
+            else
+                text = "";
+
+            //as expression
+            var text2 = (menuItem != null) ? menuItem.Text : "";
+
+            //null coalescing. menuItem ?? "";
+            //null conditional operator
+            var text3 = menuItem?.Text ?? "";
+
+            var character = GetSelectedCharacter ();
+            if (character == null)
+                return;
+
+            //Confirmation
+            var msg = $"Are you sure you want to delete {character.Name}?";
+            var result = MessageBox.Show (msg, "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+                return;
+
+            //Delete it
+            RemoveCharacter (character);
+            UpdateUI ();
+        }
     }
 }

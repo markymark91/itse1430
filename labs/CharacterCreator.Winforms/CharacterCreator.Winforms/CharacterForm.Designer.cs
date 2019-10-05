@@ -123,6 +123,7 @@
             this.cbRace.Name = "cbRace";
             this.cbRace.Size = new System.Drawing.Size(121, 21);
             this.cbRace.TabIndex = 6;
+            this.cbRace.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingRace);
             // 
             // label6
             // 
@@ -180,6 +181,7 @@
             this.cbProfession.Name = "cbProfession";
             this.cbProfession.Size = new System.Drawing.Size(121, 21);
             this.cbProfession.TabIndex = 11;
+            this.cbProfession.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingProfession);
             // 
             // _txtDescription
             // 
@@ -196,6 +198,7 @@
             this._txtStrength.Size = new System.Drawing.Size(58, 20);
             this._txtStrength.TabIndex = 13;
             this._txtStrength.Text = "50";
+            this._txtStrength.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingStat);
             // 
             // _txtDexterity
             // 
@@ -204,6 +207,7 @@
             this._txtDexterity.Size = new System.Drawing.Size(58, 20);
             this._txtDexterity.TabIndex = 14;
             this._txtDexterity.Text = "50";
+            this._txtDexterity.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingStat);
             // 
             // _txtIntelligence
             // 
@@ -212,6 +216,7 @@
             this._txtIntelligence.Size = new System.Drawing.Size(58, 20);
             this._txtIntelligence.TabIndex = 15;
             this._txtIntelligence.Text = "50";
+            this._txtIntelligence.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingStat);
             // 
             // _txtVitality
             // 
@@ -220,6 +225,7 @@
             this._txtVitality.Size = new System.Drawing.Size(58, 20);
             this._txtVitality.TabIndex = 16;
             this._txtVitality.Text = "50";
+            this._txtVitality.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingStat);
             // 
             // _txtPiety
             // 
@@ -228,6 +234,7 @@
             this._txtPiety.Size = new System.Drawing.Size(58, 20);
             this._txtPiety.TabIndex = 17;
             this._txtPiety.Text = "50";
+            this._txtPiety.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingStat);
             // 
             // btnSave
             // 

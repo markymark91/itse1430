@@ -90,6 +90,37 @@ namespace CharacterCreator.Winforms
             }
 
         }
+        private void OnValidatingRace ( object sender, CancelEventArgs e )
+        {
+            var control = sender as ComboBox;
+
+            if (control.Text == "")
+            {
+                e.Cancel = true;
+                _errors.SetError (control, "Race is required");
+            }
+        }
+        private void OnValidatingProfession ( object sender, CancelEventArgs e )
+        {
+            var control = sender as ComboBox;
+
+            if (control.Text == "")
+            {
+                e.Cancel = true;
+                _errors.SetError (control, "Profession is required");
+            }
+        }
+        private void OnValidatingStat ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+
+            var value = GetAsInt32 (control);
+            if (value < 0 || value > 100)
+            {
+                e.Cancel = true;
+                _errors.SetError (control, "Your stat can't be lower than 0 or greater than 100");
+            }
+        }
     }
 }
 /*private void OnValidatingRunLength ( object sender, CancelEventArgs e )
