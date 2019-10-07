@@ -23,7 +23,7 @@ namespace CharacterCreator.Winforms
         {
             base.OnLoad (e);
 
-            if(Character!= null)
+            if(Character != null)
             {
                 _txtName.Text = Character.Name;
                 _txtDescription.Text = Character.Description;
@@ -35,6 +35,8 @@ namespace CharacterCreator.Winforms
                 cbProfession.Text = Character.Profession;
                 cbRace.Text = Character.Race;
             };
+
+           // ValidateChildren ();
         }
 
         private void OnSave (object sender, EventArgs e)
@@ -87,6 +89,10 @@ namespace CharacterCreator.Winforms
             {
                 e.Cancel = true;
                 _errors.SetError (control, "Name is required");
+            } 
+            else
+            {
+                _errors.SetError (control, "");
             }
 
         }
@@ -98,6 +104,10 @@ namespace CharacterCreator.Winforms
             {
                 e.Cancel = true;
                 _errors.SetError (control, "Race is required");
+            } 
+            else
+            {
+                _errors.SetError (control, "");
             }
         }
         private void OnValidatingProfession ( object sender, CancelEventArgs e )
@@ -108,6 +118,10 @@ namespace CharacterCreator.Winforms
             {
                 e.Cancel = true;
                 _errors.SetError (control, "Profession is required");
+            } 
+            else
+            {
+                _errors.SetError (control, "");
             }
         }
         private void OnValidatingStat ( object sender, CancelEventArgs e )
@@ -119,6 +133,10 @@ namespace CharacterCreator.Winforms
             {
                 e.Cancel = true;
                 _errors.SetError (control, "Your stat can't be lower than 0 or greater than 100");
+            } 
+            else
+            {
+                _errors.SetError (control, "");
             }
         }
     }

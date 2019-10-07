@@ -24,7 +24,7 @@ namespace Itse1430.MovieLib.Host
         {
             base.OnLoad (e);
 
-            if(Movie!= null)
+            if(Movie != null)
             {
                 _txtName.Text = Movie.Title;
                 txtDescription.Text = Movie.Description;
@@ -33,6 +33,8 @@ namespace Itse1430.MovieLib.Host
                 cbRating.Text = Movie.Rating;
                 chkHasSeen.Checked = Movie.HasSeen;
             };
+
+            //ValidateChildren ();
         }
         private void OnSave ( object sender, EventArgs e )
         {
@@ -83,6 +85,10 @@ namespace Itse1430.MovieLib.Host
             {
                 e.Cancel = true;
                 _errors.SetError (control, "Name is required");
+            } 
+            else
+            {
+                _errors.SetError (control, "");
             }
         }
 
@@ -92,7 +98,14 @@ namespace Itse1430.MovieLib.Host
 
             var value = GetAsInt32 (control);
             if (value < 1900)
+            {
                 e.Cancel = true;
+                _errors.SetError (control, "Release year >= 1900");
+            } 
+            else
+            {
+                _errors.SetError (control, "");
+            }
         }
 
         private void OnValidatingRunLength ( object sender, CancelEventArgs e )
@@ -101,14 +114,27 @@ namespace Itse1430.MovieLib.Host
 
             var value = GetAsInt32 (control);
             if (value < 0)
+            {
                 e.Cancel = true;
+                _errors.SetError (control, "Run length must be >= 0");
+            } 
+            else
+            {
+                _errors.SetError (control, "");
+            }
         }
         private void OnValidatingRating ( object sender, CancelEventArgs e )
         {
             var control = sender as ComboBox;
 
             if (control.SelectedText == "")
+            {
                 e.Cancel = true;
+                _errors.SetError (control, "Rating is required");
+            } else
+            {
+                _errors.SetError (control, "");
+            }
         }
     }
 }
