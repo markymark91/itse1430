@@ -26,7 +26,7 @@ namespace Itse1430.MovieLib
             set { _rating = value; }
         }
         public int ReleaseYear { get; set; } = 1900; //Auto property
-        /*
+        /*//
          * full property
         public int ReleaseYear
         {
