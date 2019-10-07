@@ -115,6 +115,7 @@ namespace CharacterCreator.Winforms
             var menuItem = sender as Button;
             //this will crash if menuItem is null
             //var text = menuItem.Text;
+            //
 
             //handle null
             var text = "";
