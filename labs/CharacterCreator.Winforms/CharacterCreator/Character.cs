@@ -23,24 +23,28 @@ namespace CharacterCreator
             get { return _name ?? ""; }
             set { _name = value; }
         }
+
         //Character's Profession or Class
         public string Profession
         {
             get { return _profession ?? ""; }
             set { _profession = value; }
         }
+
         //Character's Race
         public string Race
         {
             get { return _race ?? ""; }
             set { _race = value; }
         }
+
         //Description of the character
         public string Description
         {
             get { return _description ?? ""; }
             set { _description = value; }
         }
+
         //These are the stats for each character. Set to 50 by default
         public int Strength { get; set; } = 50;
         public int Dexterity { get; set; } = 50;

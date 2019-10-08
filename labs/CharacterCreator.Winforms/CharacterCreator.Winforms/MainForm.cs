@@ -16,17 +16,20 @@ namespace CharacterCreator.Winforms
             InitializeComponent ();
             Character character = new Character ();
         }
+
         //When the user selects Exit
         private void OnFileExit ( object sender, EventArgs e )
         {
             Close ();
         }
+
         //When the user selects About
         private void OnHelpAbout ( object sender, EventArgs e )
         {
             var form = new AboutForm ();
             form.ShowDialog (this);
         }
+
         //When the user selects New to create a new character
         private void OnCharacterNew ( object sender, EventArgs e )
         {
@@ -38,13 +41,20 @@ namespace CharacterCreator.Winforms
                 UpdateUI ();
             }
         }
-        //Updates the UI after a character is added, editted, or deleted
+
+        /// <summary>
+        /// Updates the UI after a character is added, editted, or deleted
+        /// </summary>
         private void UpdateUI ()
         {
             var characters = GetCharacters ();
             _lstCharacters.DataSource = characters;
         }
-        //Adds a character to the _characters array
+
+        /// <summary>
+        /// Adds a character to the _characters array
+        /// </summary>
+        /// <param name="character"></param>
         private void AddCharacter ( Character character )
         {
             for (var index = 0; index < _characters.Length; ++index)
@@ -56,7 +66,11 @@ namespace CharacterCreator.Winforms
                 };
             };
         }
-        //Removes a character from the _characters array by setting it to null
+
+        /// <summary>
+        /// Removes a character from the _characters array by setting it to null
+        /// </summary>
+        /// <param name="character"></param>
         private void RemoveCharacter ( Character character )
         {
             for (var index = 0; index < _characters.Length; ++index)
@@ -68,7 +82,11 @@ namespace CharacterCreator.Winforms
                 };
             };
         }
-        //Gets the current list of characters. Used whenever UI is updated
+
+        /// <summary>
+        /// Gets the current list of characters. Used whenever UI is updated
+        /// </summary>
+        /// <returns></returns>
         private Character[] GetCharacters ()
         {
             var count = 0;
@@ -84,9 +102,15 @@ namespace CharacterCreator.Winforms
 
             return characters;
         }
+
         //Array of characters, with a max number of characters set to 100
         private Character[] _characters = new Character[100];
-        //When the user edits a character
+
+        /// <summary>
+        /// When the user edits a character
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnCharacterEdit ( object sender, EventArgs e )
         {
             var character = GetSelectedCharacter ();
@@ -104,13 +128,22 @@ namespace CharacterCreator.Winforms
                 UpdateUI ();
             };
         }
-        //returns the character selected by the user
+
+        /// <summary>
+        /// Gets the character the user wishes to select
+        /// </summary>
+        /// <returns> returns the character selected by the user </returns>
         private Character GetSelectedCharacter ()
         {
             var item = _lstCharacters.SelectedItem;
             return item as Character;
         }
-        //When the user wants to delete a character
+
+        /// <summary>
+        /// When the user wants to delete a character
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnCharacterDelete ( object sender, EventArgs e )
         {
             var character = GetSelectedCharacter ();

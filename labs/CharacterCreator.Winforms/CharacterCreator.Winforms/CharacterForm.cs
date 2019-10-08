@@ -45,7 +45,12 @@ namespace CharacterCreator.Winforms
 
            // ValidateChildren ();
         }
-        //When the user selects Save
+
+        /// <summary>
+        /// When the user selects Save
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnSave (object sender, EventArgs e)
         {
             if (!ValidateChildren ())
@@ -74,20 +79,33 @@ namespace CharacterCreator.Winforms
             Close ();
 
         }
-        //Gets the string and converts to integer
+
+        /// <summary>
+        /// Gets the string and converts to integer
+        /// </summary>
         private int GetAsInt32 (TextBox control)
         {
             if (Int32.TryParse (control.Text, out var result))
                 return result;
             return 0;
         }
-        //When the user selects Cancel
+
+        /// <summary>
+        /// //When the user selects Cancel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnCancel(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close ();
         }
-        //Name Validation to ensure user entered a Name
+
+        /// <summary>
+        ///  //Name Validation to ensure user entered a Name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnValidatingName ( object sender, CancelEventArgs e )
         {
             var control = sender as TextBox;
@@ -103,7 +121,12 @@ namespace CharacterCreator.Winforms
             }
 
         }
-        //Race Validation to ensure user selected a Race
+
+        /// <summary>
+        /// Race Validation to ensure user selected a Race
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnValidatingRace ( object sender, CancelEventArgs e )
         {
             var control = sender as ComboBox;
@@ -118,7 +141,12 @@ namespace CharacterCreator.Winforms
                 _errors.SetError (control, "");
             }
         }
-        //Profession validation to ensure the user selected a Profession
+
+        /// <summary>
+        /// Profession validation to ensure the user selected a Profession
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnValidatingProfession ( object sender, CancelEventArgs e )
         {
             var control = sender as ComboBox;
@@ -133,7 +161,12 @@ namespace CharacterCreator.Winforms
                 _errors.SetError (control, "");
             }
         }
-        //Stat validation to ensure user entered a value no greater than 100 or less than 0
+
+        /// <summary>
+        /// Stat validation to ensure user entered a value no greater than 100 or less than 0
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnValidatingStat ( object sender, CancelEventArgs e )
         {
             var control = sender as TextBox;
