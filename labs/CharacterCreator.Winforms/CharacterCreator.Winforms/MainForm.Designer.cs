@@ -36,8 +36,8 @@
             this.characterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this._lstCharacters = new System.Windows.Forms.ListBox();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._lstCharacters = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,7 +81,7 @@
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.OnHelpAbout);
             // 
@@ -111,14 +111,6 @@
             this.editToolStripMenuItem.Text = "&Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.OnCharacterEdit);
             // 
-            // _lstCharacters
-            // 
-            this._lstCharacters.FormattingEnabled = true;
-            this._lstCharacters.Location = new System.Drawing.Point(12, 27);
-            this._lstCharacters.Name = "_lstCharacters";
-            this._lstCharacters.Size = new System.Drawing.Size(260, 368);
-            this._lstCharacters.TabIndex = 1;
-            // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
@@ -126,6 +118,17 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "&Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.OnCharacterDelete);
+            // 
+            // _lstCharacters
+            // 
+            this._lstCharacters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._lstCharacters.FormattingEnabled = true;
+            this._lstCharacters.Location = new System.Drawing.Point(12, 27);
+            this._lstCharacters.Name = "_lstCharacters";
+            this._lstCharacters.Size = new System.Drawing.Size(260, 368);
+            this._lstCharacters.TabIndex = 1;
             // 
             // MainForm
             // 

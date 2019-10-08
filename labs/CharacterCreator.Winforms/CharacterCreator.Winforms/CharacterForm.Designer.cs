@@ -176,7 +176,8 @@
             "Monk",
             "Priest",
             "Scholar",
-            "Dragoon"});
+            "Dragoon",
+            "Hunter"});
             this.cbProfession.Location = new System.Drawing.Point(104, 114);
             this.cbProfession.Name = "cbProfession";
             this.cbProfession.Size = new System.Drawing.Size(121, 21);

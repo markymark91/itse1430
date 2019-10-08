@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * ITSE 1430
+ * Lab 2
+ * Mark Dobbins
+ */
+
+using System;
 using System.Windows.Forms;
 
 namespace CharacterCreator.Winforms
@@ -10,18 +16,18 @@ namespace CharacterCreator.Winforms
             InitializeComponent ();
             Character character = new Character ();
         }
-
+        //When the user selects Exit
         private void OnFileExit ( object sender, EventArgs e )
         {
             Close ();
         }
-
+        //When the user selects About
         private void OnHelpAbout ( object sender, EventArgs e )
         {
             var form = new AboutForm ();
             form.ShowDialog (this);
         }
-
+        //When the user selects New to create a new character
         private void OnCharacterNew ( object sender, EventArgs e )
         {
             var form = new CharacterForm ();
@@ -32,14 +38,15 @@ namespace CharacterCreator.Winforms
                 UpdateUI ();
             }
         }
+        //Updates the UI after a character is added, editted, or deleted
         private void UpdateUI ()
         {
             var characters = GetCharacters ();
             _lstCharacters.DataSource = characters;
         }
+        //Adds a character to the _characters array
         private void AddCharacter ( Character character )
         {
-            //Add to array
             for (var index = 0; index < _characters.Length; ++index)
             {
                 if (_characters[index] == null)
@@ -49,13 +56,11 @@ namespace CharacterCreator.Winforms
                 };
             };
         }
-
+        //Removes a character from the _characters array by setting it to null
         private void RemoveCharacter ( Character character )
         {
-            //Remove from array
             for (var index = 0; index < _characters.Length; ++index)
             {
-                //This won't work
                 if (_characters[index] == character)
                 {
                     _characters[index] = null;
@@ -63,74 +68,51 @@ namespace CharacterCreator.Winforms
                 };
             };
         }
-
+        //Gets the current list of characters. Used whenever UI is updated
         private Character[] GetCharacters ()
         {
-            //filter out empty movies
             var count = 0;
-            foreach (var movie in _characters)
-                if (movie != null)
+            foreach (var character in _characters)
+                if (character != null)
                     ++count;
 
             var index = 0;
-            var movies = new Character[count];
-            foreach (var movie in _characters)
-                if (movie != null)
-                    movies[index++] = movie;
+            var characters = new Character[count];
+            foreach (var character in _characters)
+                if (character != null)
+                    characters[index++] = character;
 
-            return movies;
+            return characters;
         }
-
+        //Array of characters, with a max number of characters set to 100
         private Character[] _characters = new Character[100];
-
+        //When the user edits a character
         private void OnCharacterEdit ( object sender, EventArgs e )
         {
-            //Get selected movie
             var character = GetSelectedCharacter ();
             if (character == null)
                 return;
-
+            //Changes the name of the form to Edit Character and auto fills the fields with that character's information
             var form = new CharacterForm ();
             form.Text = "Edit Character";
             form.Character = character;
 
             if (form.ShowDialog (this) == DialogResult.OK)
             {
-                //TODO: Change to update
                 RemoveCharacter (character);
-                //RemoveMovie (form.Movie);
                 AddCharacter (form.Character);
                 UpdateUI ();
             };
         }
+        //returns the character selected by the user
         private Character GetSelectedCharacter ()
         {
             var item = _lstCharacters.SelectedItem;
             return item as Character;
         }
-
+        //When the user wants to delete a character
         private void OnCharacterDelete ( object sender, EventArgs e )
         {
-            //demo
-            var menuItem = sender as Button;
-            //this will crash if menuItem is null
-            //var text = menuItem.Text;
-            //
-
-            //handle null
-            var text = "";
-            if (menuItem != null)
-                text = menuItem.Text;
-            else
-                text = "";
-
-            //as expression
-            var text2 = (menuItem != null) ? menuItem.Text : "";
-
-            //null coalescing. menuItem ?? "";
-            //null conditional operator
-            var text3 = menuItem?.Text ?? "";
-
             var character = GetSelectedCharacter ();
             if (character == null)
                 return;
@@ -141,7 +123,7 @@ namespace CharacterCreator.Winforms
             if (result != DialogResult.Yes)
                 return;
 
-            //Delete it
+            //Delete
             RemoveCharacter (character);
             UpdateUI ();
         }
