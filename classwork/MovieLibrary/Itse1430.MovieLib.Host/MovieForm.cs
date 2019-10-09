@@ -127,7 +127,7 @@ namespace Itse1430.MovieLib.Host
         {
             var control = sender as ComboBox;
 
-            if (control.SelectedText == "")
+            if (control.SelectedIndex == -1)
             {
                 e.Cancel = true;
                 _errors.SetError (control, "Rating is required");

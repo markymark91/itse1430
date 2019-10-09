@@ -9,6 +9,7 @@ namespace Itse1430.MovieLib
     /// <summary> Represents movie data. </summary>
     public class Movie
     {
+        public int Id { get; set; }
         /// <summary>Gets or sets the title of the movie.</summary>
         public string Title
         {
@@ -26,7 +27,7 @@ namespace Itse1430.MovieLib
             set { _rating = value; }
         }
         public int ReleaseYear { get; set; } = 1900; //Auto property
-        /*//
+        /*
          * full property
         public int ReleaseYear
         {
