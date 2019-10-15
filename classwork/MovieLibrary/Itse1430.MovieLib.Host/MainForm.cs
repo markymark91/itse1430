@@ -9,11 +9,12 @@ namespace Itse1430.MovieLib.Host
         public MainForm ()
         {
             InitializeComponent ();
+        }
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad (e);
 
-            //Itse1430.MovieLib.Movie
-            Movie movie = new Movie ();
-            movie.Title = "Jaws";
-            movie.Description = movie.Title;
+            UpdateUI();
         }
 
         //Called when Movie\Add selected
@@ -139,5 +140,7 @@ namespace Itse1430.MovieLib.Host
 
         //private Movie[] _movies = new Movie[100];
         private MovieDatabase _movies = new MovieDatabase ();
+
+        
     }
 }

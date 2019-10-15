@@ -93,7 +93,7 @@ namespace Itse1430.MovieLib
             if (ReleaseYear < 1900)
                 return "Release Year must be >= 1900";
             //Run length >= 0
-            if (RunLength <= 0)
+            if (RunLength < 0)
                 return "Run Length must be >=0";
             //Rating is required
             if (String.IsNullOrEmpty (Rating))

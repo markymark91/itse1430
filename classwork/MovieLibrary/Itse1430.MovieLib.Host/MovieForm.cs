@@ -40,14 +40,17 @@ namespace Itse1430.MovieLib.Host
         {
             if (!ValidateChildren ())
                 return;
-            var movie = new Movie ();
-            //movie.set_title(_txtName.Text); below is same thing
-            movie.Title = _txtName.Text;
-            movie.Description = txtDescription.Text;
-            movie.ReleaseYear = GetAsInt32 (_txtReleaseYear);
-            movie.RunLength = GetAsInt32 (_txtRunLength);
-            movie.Rating = cbRating.Text;
-            movie.HasSeen = chkHasSeen.Checked;
+
+            //Object initializer syntax
+            var movie = new Movie () {
+                //movie.set_title(_txtName.Text); below is same thing
+                HasSeen = chkHasSeen.Checked,
+                Title = _txtName.Text,
+                Description = txtDescription.Text,
+                ReleaseYear = GetAsInt32 (_txtReleaseYear),
+                RunLength = GetAsInt32 (_txtRunLength),
+                Rating = cbRating.Text,
+            };
 
             //Validate
             var message = movie.Validate ();
