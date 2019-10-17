@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace Itse1430.MovieLib
 {
     /// <summary> Represents movie data. </summary>
-    public class Movie
+    public class Movie : IValidatableObject
     {
         public int Id { get; set; }
         /// <summary>Gets or sets the title of the movie.</summary>
@@ -82,7 +83,7 @@ namespace Itse1430.MovieLib
 
         /// <summary>Validates the movie.</summary>
         /// <returns>An error message if validation fails or empty string otherwise</returns>
-        public string Validate()
+        /*public string Validate()
         {
             //this is implicit first parameter, represents instance
             var title = "";
@@ -100,6 +101,34 @@ namespace Itse1430.MovieLib
                 return "Rating is required";
 
             return "";
+        }*/
+
+        public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
+        {
+            //Iterator syntax
+            //var results = new List<ValidationResult> ();
+
+
+
+            //Name is required
+            if (String.IsNullOrEmpty (this.Title))
+                //results.Add(new ValidationResult("Name is required"));
+                yield return new ValidationResult ("Name is required");
+
+            //Release year >= 1900
+            if (ReleaseYear < 1900)
+                //results.Add(new ValidationResult("Release Year must be >= 1900"));
+                yield return new ValidationResult ("Release Year must be >= 1900");
+            //Run length >= 0
+            if (RunLength < 0)
+                //results.Add(new ValidationResult( "Run Length must be >=0"));
+                yield return new ValidationResult ("Run Length must be >=0");
+            //Rating is required
+            if (String.IsNullOrEmpty (Rating))
+                //results.Add(new ValidationResult( "Rating is required"));
+                yield return new ValidationResult ("Rating is required");
+
+            //return results
         }
         //can new up other objects, however this wont have access to any of the cool stuff above
         //private Movie originalMovie = new Movie ();

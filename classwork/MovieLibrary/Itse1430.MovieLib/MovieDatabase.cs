@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,7 +66,12 @@ namespace Itse1430.MovieLib
             //TODO: Validation
             if (movie == null)
                 return null;
-            if (!String.IsNullOrEmpty (movie.Validate ()))
+
+
+            //if (!String.IsNullOrEmpty (movie.Validate ()))
+            var context = new ValidationContext (movie);
+            var results = movie.Validate (context);
+            if (results.Count () > 0)
                 return null;
 
             //Name must be unique
@@ -121,7 +127,10 @@ namespace Itse1430.MovieLib
                 return;
             if (newMovie == null)
                 return;
-            if (!String.IsNullOrEmpty (newMovie.Validate()))
+            // if (!String.IsNullOrEmpty (newMovie.Validate()))
+            var context = new ValidationContext (newMovie);
+            var results = newMovie.Validate (context);
+            if (results.Count () > 0)
                 return;
 
             var existing = FindMovie (newMovie.Title);
