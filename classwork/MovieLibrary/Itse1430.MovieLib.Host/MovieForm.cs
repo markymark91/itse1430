@@ -71,8 +71,7 @@ namespace Itse1430.MovieLib.Host
             //var context = new ValidationContext (movie);
             //var results = movie.Validate (context);
 
-            var validator = new ObjectValidator ();
-            var results = validator.TryValidateObject (movie);
+            var results = ObjectValidator.TryValidateObject (movie);
             if(results.Count() > 0)
             //if (results.Count () > 0)
             {
