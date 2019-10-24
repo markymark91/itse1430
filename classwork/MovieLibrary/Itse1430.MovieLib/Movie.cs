@@ -14,18 +14,20 @@ namespace Itse1430.MovieLib
         /// <summary>Gets or sets the title of the movie.</summary>
         public string Title
         {
-            get { return _title ?? ""; }
-            set { _title = value; }
+            //get { return _title ?? ""; }
+            get => _title ?? "";
+            //set { _title = value; }
+            set => _title = value;
         }
         public string Description
         {
-            get { return _description ?? ""; }
-            set { _description = value; }
+            get => _description ?? ""; 
+            set => _description = value; 
         }
         public string Rating
         {
-            get { return _rating ?? ""; }
-            set { _rating = value; }
+            get => _rating ?? ""; 
+            set => _rating = value; 
         }
         public int ReleaseYear { get; set; } = 1900; //Auto property
         /*
@@ -50,27 +52,29 @@ namespace Itse1430.MovieLib
         //public const int ReleaseYearForColor { get; }= 1939;
         //constant field
         public const int ReleaseYearForColor = 1939;
-        
+
         //public readonly int ReleaseYearForColor = 1939;
 
         //private readonly int _releaseYearForColor = 1939;
+        //public bool IsBlackAndWhite
+        //{
+        //    get => ReleaseYear <= ReleaseYearForColor; 
+        //    //set { }
+        //}
         public bool IsBlackAndWhite
-        {
-            get { return ReleaseYear <= ReleaseYearForColor; }
+            => ReleaseYear <= ReleaseYearForColor;
             //set { }
-        }
+        
 
         public string TestAccessibility
         {
-            get { return ""; }
+            get => ""; 
             private set { }
         }
 
         public override string ToString()
-        {
-            return $"{Title} ({ReleaseYear})";
-            
-        }
+            => $"{Title} ({ReleaseYear})";
+
 
         //Fields - data to be stored
         //never make fields public
