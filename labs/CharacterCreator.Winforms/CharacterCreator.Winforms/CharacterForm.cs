@@ -1,17 +1,13 @@
 ﻿/*
  * ITSE 1430
- * Lab 2
+ * Lab 3
  * Mark Dobbins
  */
- 
+
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CharacterCreator.Winforms
@@ -51,33 +47,52 @@ namespace CharacterCreator.Winforms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnSave (object sender, EventArgs e)
+        private void OnSave ( object sender, EventArgs e )
         {
             if (!ValidateChildren ())
                 return;
-            var character = new Character ();
-            character.Name = _txtName.Text;
-            character.Description = _txtDescription.Text;
-            character.Strength = GetAsInt32 (_txtStrength);
-            character.Intelligence = GetAsInt32 (_txtIntelligence);
-            character.Dexterity = GetAsInt32 (_txtDexterity);
-            character.Piety = GetAsInt32 (_txtPiety);
-            character.Vitality = GetAsInt32 (_txtVitality);
-            character.Race = cbRace.Text;
-            character.Profession = cbProfession.Text;
 
-            var message = character.Validate ();
+            var character = new Character () {
+            Name = _txtName.Text,
+            Description = _txtDescription.Text,
+            Strength = GetAsInt32 (_txtStrength),
+            Intelligence = GetAsInt32 (_txtIntelligence),
+            Dexterity = GetAsInt32 (_txtDexterity),
+            Piety = GetAsInt32 (_txtPiety),
+            Vitality = GetAsInt32 (_txtVitality),
+            Race = cbRace.Text,
+            Profession = cbProfession.Text
+        };
+
+            /*var message = character.Validate ();
             if (!String.IsNullOrEmpty (message))
             {
                 MessageBox.Show (this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
+            }*/
+            if (!Validate (character))
+                return;
 
             Character = character;
 
             DialogResult = DialogResult.OK;
             Close ();
 
+        }
+
+        private bool Validate(IValidatableObject character)
+        {
+            var results = ObjectValidator.TryValidateObject (character);
+            if(results.Count() > 0)
+            {
+                foreach (var result in results)
+                {
+                    MessageBox.Show (this, result.ErrorMessage, "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                };
+                return false;
+            }
+            return true;
         }
 
         /// <summary>

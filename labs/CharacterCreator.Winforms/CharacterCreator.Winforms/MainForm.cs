@@ -1,11 +1,13 @@
 ﻿/*
  * ITSE 1430
- * Lab 2
+ * Lab 3
  * Mark Dobbins
  */
 
 using System;
 using System.Windows.Forms;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace CharacterCreator.Winforms
 {
@@ -14,9 +16,18 @@ namespace CharacterCreator.Winforms
         public MainForm ()
         {
             InitializeComponent ();
-            Character character = new Character ();
+            //Character character = new Character ();
         }
 
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad (e);
+
+            _characters = new MemoryCharacterRoster ();
+            var count = _characters.GetAll ().Count ();
+
+            UpdateUI ();
+        }
         //When the user selects Exit
         private void OnFileExit ( object sender, EventArgs e )
         {
@@ -37,7 +48,7 @@ namespace CharacterCreator.Winforms
 
             if (form.ShowDialog (this) == DialogResult.OK)
             {
-                AddCharacter (form.Character);
+                _characters.Add (form.Character);
                 UpdateUI ();
             }
         }
@@ -47,64 +58,12 @@ namespace CharacterCreator.Winforms
         /// </summary>
         private void UpdateUI ()
         {
-            var characters = GetCharacters ();
-            _lstCharacters.DataSource = characters;
+            var characters = _characters.GetAll ()
+                                        .OrderBy (c => c.Name)
+                                        .ThenBy (c => c.Profession);
+            _lstCharacters.DataSource = characters.ToArray();
         }
 
-        /// <summary>
-        /// Adds a character to the _characters array
-        /// </summary>
-        /// <param name="character"></param>
-        private void AddCharacter ( Character character )
-        {
-            for (var index = 0; index < _characters.Length; ++index)
-            {
-                if (_characters[index] == null)
-                {
-                    _characters[index] = character;
-                    return;
-                };
-            };
-        }
-
-        /// <summary>
-        /// Removes a character from the _characters array by setting it to null
-        /// </summary>
-        /// <param name="character"></param>
-        private void RemoveCharacter ( Character character )
-        {
-            for (var index = 0; index < _characters.Length; ++index)
-            {
-                if (_characters[index] == character)
-                {
-                    _characters[index] = null;
-                    return;
-                };
-            };
-        }
-
-        /// <summary>
-        /// Gets the current list of characters. Used whenever UI is updated
-        /// </summary>
-        /// <returns></returns>
-        private Character[] GetCharacters ()
-        {
-            var count = 0;
-            foreach (var character in _characters)
-                if (character != null)
-                    ++count;
-
-            var index = 0;
-            var characters = new Character[count];
-            foreach (var character in _characters)
-                if (character != null)
-                    characters[index++] = character;
-
-            return characters;
-        }
-
-        //Array of characters, with a max number of characters set to 100
-        private Character[] _characters = new Character[100];
 
         /// <summary>
         /// When the user edits a character
@@ -123,8 +82,7 @@ namespace CharacterCreator.Winforms
 
             if (form.ShowDialog (this) == DialogResult.OK)
             {
-                RemoveCharacter (character);
-                AddCharacter (form.Character);
+                _characters.Update (character.Id, form.Character);
                 UpdateUI ();
             };
         }
@@ -157,8 +115,9 @@ namespace CharacterCreator.Winforms
                 return;
 
             //Delete
-            RemoveCharacter (character);
+            _characters.Delete (character.Id);
             UpdateUI ();
         }
+        private ICharacterRoster _characters;
     }
 }

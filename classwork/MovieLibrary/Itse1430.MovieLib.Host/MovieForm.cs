@@ -77,7 +77,8 @@ namespace Itse1430.MovieLib.Host
             {
                 foreach (var result in results)
                 {
-                    MessageBox.Show (this, result.ErrorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show (this, result.ErrorMessage, "Error", MessageBoxButtons.OK, 
+                        MessageBoxIcon.Error);
                 };
                 return false;
             }
