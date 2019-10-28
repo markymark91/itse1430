@@ -28,9 +28,13 @@ namespace Itse1430.MovieLib
         }
         protected override IEnumerable<Movie> GetAllCore ()
         {
-            foreach (var movie in _movies)
-                yield return Clone (new Movie (), movie);
+            return from m in _movies
+                //where m.Id > 0
+               // orderby m.Title, m.ReleaseYear
+                select Clone (new Movie (), m);
+            //return _movies.Select (m => Clone (new Movie (), m));
         }
+        
 
         protected override Movie GetCore ( int id )
         {
@@ -75,11 +79,13 @@ namespace Itse1430.MovieLib
 
         protected override Movie GetByNameCore ( string name )
         {
-            foreach (var movie in _movies)
-                if (String.Compare (movie.Title, name, true) == 0)
-                return movie;
+            return _movies.FirstOrDefault (m => String.Compare (m.Title, name, true) == 0);
+                //.FirstOrDefault ();
+            //foreach (var movie in _movies)
+                //if (String.Compare (movie.Title, name, true) == 0)
+                //return movie;
 
-            return null;
+            //return null;
         }
 
         //private Movie[] _movies = new Movie[100];

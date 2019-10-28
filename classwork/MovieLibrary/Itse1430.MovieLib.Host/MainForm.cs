@@ -28,7 +28,7 @@ namespace Itse1430.MovieLib.Host
         private void OnMovieAdd ( object sender, EventArgs e )
         {
             var form = new MovieForm ();
-
+            
             //Modeless - does not block main window
             //form.Show();
 
@@ -145,16 +145,20 @@ namespace Itse1430.MovieLib.Host
         }*/
         private void UpdateUI()
         {
-            var movies = _movies.GetAll ()
-                                //.OrderBy (OrderByTitle)
-                                .OrderBy (m => m.Title)
-                                //.ThenBy(OrderByReleaseYear);
-                                .ThenBy (m => m.ReleaseYear);
+            var movies = from m in _movies.GetAll ()
+                         orderby m.Title, m.ReleaseYear
+                         select m;
+            // _movies.GetAll ()
+            //                 //.OrderBy (OrderByTitle)
+            //                 .OrderBy (m => m.Title)
+            //                 //.ThenBy(OrderByReleaseYear);
+            //                 .ThenBy (m => m.ReleaseYear);
 
             /*Programmatic approach 
             _lstMovies.Items.Clear ();
             _lstMovies.Items.AddRange (movies);
             */
+            PlayWithEnumerable (movies);
 
             _lstMovies.DataSource = movies.ToArray ();
 

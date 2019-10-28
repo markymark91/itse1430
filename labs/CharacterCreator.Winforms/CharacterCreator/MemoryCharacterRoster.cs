@@ -49,9 +49,15 @@ namespace CharacterCreator
         }
         protected override IEnumerable<Character> GetAllCore ()
         {
-            foreach (var character in _characters)
-                yield return Clone (new Character (), character);
+            return from c in _characters
+                   //where c.Id > 0
+                   //orderby c.Name
+                   select Clone (new Character (), c);
+                // => _characters.Select (c => Clone (new Character (), c));
         }
+            //foreach (var character in _characters)
+                //yield return Clone (new Character (), character);
+        
         protected override Character GetCore ( int id )
         {
             var character = FindCharacter (id);
@@ -70,11 +76,13 @@ namespace CharacterCreator
         }
         protected override Character GetByNameCore ( string name )
         {
-            foreach (var character in _characters)
-                if (String.Compare (character.Name, name, true) == 0)
-                    return character;
+            return _characters.FirstOrDefault (c => String.Compare (c.Name, name, true) == 0);
+                //.FirstOrDefault ();
+            //foreach (var character in _characters)
+                //if (String.Compare (character.Name, name, true) == 0)
+                    //return character;
 
-            return null;
+            //return null;
         }
 
         private List<Character> _characters = new List<Character> ();

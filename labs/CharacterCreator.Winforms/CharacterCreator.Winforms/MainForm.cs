@@ -58,10 +58,13 @@ namespace CharacterCreator.Winforms
         /// </summary>
         private void UpdateUI ()
         {
-            var characters = _characters.GetAll ()
-                                        .OrderBy (c => c.Name)
-                                        .ThenBy (c => c.Profession);
-            _lstCharacters.DataSource = characters.ToArray();
+            var characters = from c in _characters.GetAll ()
+                             orderby c.Name
+                             select c;
+            // _characters.GetAll ()
+            //         .OrderBy (c => c.Name)
+            //         .ThenBy (c => c.Profession);
+            _lstCharacters.DataSource = characters.ToArray ();
         }
 
 
