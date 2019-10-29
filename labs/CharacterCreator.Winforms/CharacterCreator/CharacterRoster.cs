@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +11,18 @@ namespace CharacterCreator
     {
         public Character Add (Character character)
         {
-            if (character == null)
-                return null;
+            //if (character == null)
+            //return null;
+            if(character == null)
+                throw new ArgumentNullException (nameof (character));
 
             var results = ObjectValidator.TryValidateObject (character);
             if (results.Count () > 0)
-                return null;
+                throw new ValidationException (results.FirstOrDefault().ErrorMessage);
 
             var existing = GetByNameCore (character.Name);
             if (existing != null)
-                return null;
+                throw new InvalidOperationException ("Character must be unique");
 
             return AddCore (character);
         }
@@ -29,6 +32,9 @@ namespace CharacterCreator
 
         public void Delete (int id)
         {
+            if (id <= 0)
+                throw new ArgumentOutOfRangeException (nameof(id), "Id must be > 0");
+
             DeleteCore (id);
         }
         protected abstract void DeleteCore ( int id );
@@ -42,7 +48,8 @@ namespace CharacterCreator
         public Character Get (int id)
         {
             if (id <= 0)
-                return null;
+                //return null;
+                throw new ArgumentOutOfRangeException (nameof (id), "Id must be > 0");
 
             return GetCore (id);
         }
@@ -51,17 +58,19 @@ namespace CharacterCreator
         public  void Update ( int id, Character newCharacter )
         {
             if (id <=0)
-                return;
+                throw new ArgumentOutOfRangeException (nameof (id), "Id must be > 0");
             if (newCharacter==null)
-                return;
+                throw new ArgumentNullException (nameof (newCharacter));
 
             var results = ObjectValidator.TryValidateObject (newCharacter);
             if (results.Count () > 0)
-                return;
+                //return;
+                throw new ValidationException (results.FirstOrDefault ().ErrorMessage);
 
             var existing = GetByNameCore (newCharacter.Name);
             if (existing != null && existing.Id != id)
-                return;
+                //return;
+                throw new InvalidOperationException ("Character must be unique");
 
             UpdateCore (id, newCharacter);
         }

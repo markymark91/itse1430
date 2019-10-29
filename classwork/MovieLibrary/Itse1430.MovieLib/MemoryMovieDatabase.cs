@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +46,8 @@ namespace Itse1430.MovieLib
         {
             var existing = FindMovie (id);
             if (existing == null)
-                return null;//TODO: Error
+                //return null;
+                throw new FileNotFoundException ();
 
             //update existing movie
             newMovie.Id = id;
