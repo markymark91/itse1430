@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 
 namespace Itse1430.MovieLib
@@ -31,7 +32,7 @@ namespace Itse1430.MovieLib
             var existing = GetByNameCore (movie.Title);
             if (existing!= null)
                 //return null;
-                throw new InvalidOperationException ("Movie must be unique");
+                throw new ArgumentException ("Movie must be unique");
 
             return AddCore (movie);
         }
@@ -50,7 +51,7 @@ namespace Itse1430.MovieLib
 
         public IEnumerable<Movie> GetAll ()
         {
-            return GetAllCore ();
+            return GetAllCore () ?? Enumerable.Empty<Movie>();
         }
 
         protected abstract IEnumerable<Movie> GetAllCore ();
@@ -85,9 +86,15 @@ namespace Itse1430.MovieLib
 
             var existing = GetByNameCore (newMovie.Title);
             if (existing != null && existing.Id != id)
-                throw new InvalidOperationException ("Movie must be unique");
-
-            UpdateCore (id, newMovie);
+                throw new ArgumentException ("Movie must be unique");
+            try
+            {
+                UpdateCore (id, newMovie);
+            }   catch (IOException ex)
+            {
+                throw new Exception ("An error occurred updating the movie", ex);
+            };
+            //UpdateCore (id, newMovie);
         }
 
         protected abstract Movie UpdateCore ( int id, Movie newMovie );
