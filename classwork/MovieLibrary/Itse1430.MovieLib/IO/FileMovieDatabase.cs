@@ -37,30 +37,99 @@ namespace Itse1430.MovieLib.IO
                 var lines = File.ReadAllLines (_filePath);
                 foreach (var line in lines)
                 {
-
+                    var movie = LoadMovie (line);
+                    if (movie != null)
+                        yield return movie;
                 };
             };
-            yield return new Movie ();
         }
 
         private readonly string _filePath;
         protected override Movie GetByNameCore ( string name )
-        { throw new NotImplementedException (); }
+        {
+            //var stream = File.OpenRead (_filePath);
+            //hard way
+            //stream.Read()
+
+            using (var reader = new StreamReader (_filePath))
+            {
+                //try
+                //{
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine ();
+                    var movie = LoadMovie (line);
+                    if (String.Compare (movie?.Title, name, true) == 0)
+                        return movie;
+                };
+            };
+            //} finally
+            //{
+            //   reader.Close ();
+            //}
+            return null;
+        }
 
         protected override Movie GetCore ( int id )
-        { throw new NotImplementedException (); }
+        {
+            using (var reader = new StreamReader (_filePath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine ();
+                    var movie = LoadMovie (line);
+                    if (movie?.Id == id)
+                        return movie;
+                };
+            }
+            return null;
+        }
 
         protected override void RemoveCore ( int id )
-        { throw new NotImplementedException (); }
+        {
+            var movies = GetAllCore ()
+                                .Where (m => m.Id != id);
+
+            SaveMovies (movies); 
+        }
 
         protected override Movie UpdateCore ( int id, Movie newMovie )
-        { throw new NotImplementedException (); }
+        {
+            var movies = GetAllCore ()
+                                    .Where (m => m.Id != id);
+
+            newMovie.Id = id;
+            movies = movies.Union (new[] { newMovie });
+
+            SaveMovies (movies);
+            return newMovie;
+        }
         private void SaveMovies (IEnumerable<Movie> items)
         {
             var lines = items.Select (i => SaveMovie (i)).ToArray();
             File.WriteAllLines (_filePath, lines);
         }
 
+        private Movie LoadMovie(string line)
+        {
+            if (String.IsNullOrEmpty (line))
+                return null;
+
+            var tokens = line.Split (',');
+            if (tokens.Length != 7)
+                return null;
+
+            return new Movie () {
+                Id = Int32.TryParse (tokens[0], out var id) ? id : 0,
+                Title = tokens[1].Trim('"', ' '),
+                Description = tokens[2].Trim('"', ' '),
+                Rating = tokens[3].Trim ('"', ' '),
+                ReleaseYear = Int32.TryParse (tokens[4], out var year) ? year : 0,
+                RunLength = Int32.TryParse (tokens[5], out var length) ? length : 0,
+                HasSeen = Boolean.TryParse (tokens[6], out var seen) ? seen : false
+            };
+
+        }
         private string SaveMovie(Movie item)
         {
             //Field,Field2,...
