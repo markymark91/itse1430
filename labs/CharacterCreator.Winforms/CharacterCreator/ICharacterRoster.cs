@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * ITSE 1430
+ * Lab 4
+ * Mark Dobbins
+ * ICharacterRoster.cs
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

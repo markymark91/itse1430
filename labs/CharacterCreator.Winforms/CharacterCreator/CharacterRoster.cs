@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * ITSE 1430
+ * Lab 4
+ * Mark Dobbins
+ * CharacterRoster.cs
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,8 +18,6 @@ namespace CharacterCreator
     {
         public Character Add (Character character)
         {
-            //if (character == null)
-            //return null;
             if(character == null)
                 throw new ArgumentNullException (nameof (character));
 
@@ -48,7 +53,7 @@ namespace CharacterCreator
         public Character Get (int id)
         {
             if (id <= 0)
-                //return null;
+
                 throw new ArgumentOutOfRangeException (nameof (id), "Id must be > 0");
 
             return GetCore (id);
@@ -64,12 +69,12 @@ namespace CharacterCreator
 
             var results = ObjectValidator.TryValidateObject (newCharacter);
             if (results.Count () > 0)
-                //return;
+
                 throw new ValidationException (results.FirstOrDefault ().ErrorMessage);
 
             var existing = GetByNameCore (newCharacter.Name);
             if (existing != null && existing.Id != id)
-                //return;
+
                 throw new InvalidOperationException ("Character must be unique");
 
             UpdateCore (id, newCharacter);

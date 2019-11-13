@@ -1,7 +1,8 @@
 ﻿/*
  * ITSE 1430
- * Lab 3
+ * Lab 4
  * Mark Dobbins
+ * Character.cs
  */
 
 using System;

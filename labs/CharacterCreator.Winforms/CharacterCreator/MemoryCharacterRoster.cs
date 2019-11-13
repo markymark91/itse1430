@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * ITSE 1430
+ * Lab 4
+ * Mark Dobbins
+ * MemoryCharacterRoster.cs
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,13 +57,11 @@ namespace CharacterCreator
         protected override IEnumerable<Character> GetAllCore ()
         {
             return from c in _characters
-                   //where c.Id > 0
-                   //orderby c.Name
+
                    select Clone (new Character (), c);
-                // => _characters.Select (c => Clone (new Character (), c));
+
         }
-            //foreach (var character in _characters)
-                //yield return Clone (new Character (), character);
+
         
         protected override Character GetCore ( int id )
         {
@@ -77,12 +82,6 @@ namespace CharacterCreator
         protected override Character GetByNameCore ( string name )
         {
             return _characters.FirstOrDefault (c => String.Compare (c.Name, name, true) == 0);
-                //.FirstOrDefault ();
-            //foreach (var character in _characters)
-                //if (String.Compare (character.Name, name, true) == 0)
-                    //return character;
-
-            //return null;
         }
 
         private List<Character> _characters = new List<Character> ();

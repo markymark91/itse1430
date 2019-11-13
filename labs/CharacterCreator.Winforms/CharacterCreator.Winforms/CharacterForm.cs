@@ -1,7 +1,8 @@
 ﻿/*
  * ITSE 1430
- * Lab 3
+ * Lab 4
  * Mark Dobbins
+ * CharacterForm.cs
  */
 
 using System;
@@ -38,8 +39,6 @@ namespace CharacterCreator.Winforms
                 cbProfession.Text = Character.Profession;
                 cbRace.Text = Character.Race;
             };
-
-           // ValidateChildren ();
         }
 
         /// <summary>
@@ -52,24 +51,19 @@ namespace CharacterCreator.Winforms
             if (!ValidateChildren ())
                 return;
 
-            var character = new Character () {
-            Name = _txtName.Text,
-            Description = _txtDescription.Text,
-            Strength = GetAsInt32 (_txtStrength),
-            Intelligence = GetAsInt32 (_txtIntelligence),
-            Dexterity = GetAsInt32 (_txtDexterity),
-            Piety = GetAsInt32 (_txtPiety),
-            Vitality = GetAsInt32 (_txtVitality),
-            Race = cbRace.Text,
-            Profession = cbProfession.Text
-        };
-
-            /*var message = character.Validate ();
-            if (!String.IsNullOrEmpty (message))
+            var character = new Character () 
             {
-                MessageBox.Show (this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }*/
+                Name = _txtName.Text,
+                Description = _txtDescription.Text,
+                Strength = GetAsInt32 (_txtStrength),
+                Intelligence = GetAsInt32 (_txtIntelligence),
+                Dexterity = GetAsInt32 (_txtDexterity),
+                Piety = GetAsInt32 (_txtPiety),
+                Vitality = GetAsInt32 (_txtVitality),
+                Race = cbRace.Text,
+                Profession = cbProfession.Text
+            };
+
             if (!Validate (character))
                 return;
 

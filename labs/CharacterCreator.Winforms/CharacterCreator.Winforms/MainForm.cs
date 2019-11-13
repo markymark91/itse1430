@@ -1,7 +1,8 @@
 ﻿/*
  * ITSE 1430
- * Lab 3
+ * Lab 4
  * Mark Dobbins
+ * MainForm.cs
  */
 
 using System;
@@ -16,7 +17,6 @@ namespace CharacterCreator.Winforms
         public MainForm ()
         {
             InitializeComponent ();
-            //Character character = new Character ();
         }
 
         protected override void OnLoad ( EventArgs e )
@@ -61,9 +61,6 @@ namespace CharacterCreator.Winforms
             var characters = from c in _characters.GetAll ()
                              orderby c.Name
                              select c;
-            // _characters.GetAll ()
-            //         .OrderBy (c => c.Name)
-            //         .ThenBy (c => c.Profession);
             _lstCharacters.DataSource = characters.ToArray ();
         }
 
