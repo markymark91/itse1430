@@ -39,8 +39,8 @@ namespace Itse1430.MovieLib.Host
         }
         private void OnSave ( object sender, EventArgs e )
         {
-            if (!ValidateChildren ())
-                return;
+            //if (!ValidateChildren ())
+            //    return;
 
             //Object initializer syntax
             var movie = new Movie () {
@@ -54,8 +54,8 @@ namespace Itse1430.MovieLib.Host
             };
 
             //Validate
-            if (!Validate (movie))
-                return;
+            //if (!Validate (movie))
+            //    return;
 
 
             //TODO: Save It

@@ -12,11 +12,10 @@ namespace Itse1430.MovieLib
     {
         public int Id { get; set; }
         /// <summary>Gets or sets the title of the movie.</summary>
+        [RequiredAttribute(AllowEmptyStrings = false)]
         public string Title
         {
-            //get { return _title ?? ""; }
             get => _title ?? "";
-            //set { _title = value; }
             set => _title = value;
         }
         public string Description
@@ -24,11 +23,15 @@ namespace Itse1430.MovieLib
             get => _description ?? ""; 
             set => _description = value; 
         }
+        [Required(AllowEmptyStrings = false)]
         public string Rating
         {
             get => _rating ?? ""; 
             set => _rating = value; 
         }
+
+        [Display(Name = "Release Year")]
+        [Range(1900, Int32.MaxValue, ErrorMessage = "Release year must be equal to or greater than 1900")]
         public int ReleaseYear { get; set; } = 1900; //Auto property
         /*
          * full property
@@ -37,6 +40,8 @@ namespace Itse1430.MovieLib
             get { return _releaseYear; }
             set { _releaseYear = value; }
         }*/
+
+        [RangeAttribute(0, Int32.MaxValue, ErrorMessage = "Run length must be equal to or greater than 0")]
         public int RunLength { get; set; }
         //{
         //    get { return _runLength; }
@@ -65,7 +70,7 @@ namespace Itse1430.MovieLib
             => ReleaseYear <= ReleaseYearForColor;
             //set { }
         
-
+        [Obsolete("Do not use", true)]
         public string TestAccessibility
         {
             get => ""; 
@@ -109,32 +114,18 @@ namespace Itse1430.MovieLib
 
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
         {
-            //Iterator syntax
-            //var results = new List<ValidationResult> ();
-
-
-
-            //Name is required
-            if (String.IsNullOrEmpty (this.Title))
-                //results.Add(new ValidationResult("Name is required"));
-                yield return new ValidationResult ("Name is required");
-
-            //Release year >= 1900
-            if (ReleaseYear < 1900)
-                //results.Add(new ValidationResult("Release Year must be >= 1900"));
-                yield return new ValidationResult ("Release Year must be >= 1900");
-            //Run length >= 0
-            if (RunLength < 0)
-                //results.Add(new ValidationResult( "Run Length must be >=0"));
-                yield return new ValidationResult ("Run Length must be >=0");
+            return Enumerable.Empty<ValidationResult> ();
             //Rating is required
-            if (String.IsNullOrEmpty (Rating))
+            /*if (String.IsNullOrEmpty (Rating))
                 //results.Add(new ValidationResult( "Rating is required"));
                 yield return new ValidationResult ("Rating is required");
+            */
 
             //return results
         }
         //can new up other objects, however this wont have access to any of the cool stuff above
         //private Movie originalMovie = new Movie ();
+
     }
+    //[AttributeUsage(AttributeTargets.)]
 }
