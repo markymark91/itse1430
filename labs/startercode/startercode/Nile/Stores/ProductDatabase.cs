@@ -3,6 +3,8 @@
  */
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Nile.Stores
 {
@@ -14,9 +16,16 @@ namespace Nile.Stores
         /// <returns>The added product.</returns>
         public Product Add ( Product product )
         {
-            //TODO: Check arguments
+            if (product == null)
+                throw new ArgumentNullException (nameof (product));
 
-            //TODO: Validate product
+            var results = ObjectValidator.TryValidateObject (product);
+            if (results.Count () > 0)
+                throw new ValidationException (results.FirstOrDefault ().ErrorMessage);
+
+            var existing = GetCore (product.Id);
+            if (existing != null)
+                throw new ArgumentException ("Product must be unique");
 
             //Emulate database by storing copy
             return AddCore(product);
@@ -26,7 +35,8 @@ namespace Nile.Stores
         /// <returns>The product, if it exists.</returns>
         public Product Get ( int id )
         {
-            //TODO: Check arguments
+            if (id <= 0)
+                throw new ArgumentOutOfRangeException (nameof (id), "Id must be greater than 0");
 
             return GetCore(id);
         }
@@ -42,9 +52,12 @@ namespace Nile.Stores
         /// <param name="id">The product to remove.</param>
         public void Remove ( int id )
         {
-            //TODO: Check arguments
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException (nameof (id), "Id must be greater than 0");
+            }
 
-            RemoveCore(id);
+            RemoveCore (id);
         }
         
         /// <summary>Updates a product.</summary>
@@ -52,9 +65,14 @@ namespace Nile.Stores
         /// <returns>The updated product.</returns>
         public Product Update ( Product product )
         {
-            //TODO: Check arguments
+            if (product.Id <= 0)
+                throw new ArgumentOutOfRangeException (nameof (product.Id), "Id must be greater than 0");
+            if (product == null)
+                throw new ArgumentNullException (nameof (product));
 
-            //TODO: Validate product
+            var results = ObjectValidator.TryValidateObject (product);
+            if (results.Count () > 0)
+                throw new ValidationException (results.FirstOrDefault ().ErrorMessage);
 
             //Get existing product
             var existing = GetCore(product.Id);

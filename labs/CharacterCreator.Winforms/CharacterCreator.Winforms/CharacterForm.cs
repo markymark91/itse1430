@@ -53,7 +53,7 @@ namespace CharacterCreator.Winforms
 
             var character = new Character () 
             {
-                Name = _txtName.Text,
+                4Name = _txtName.Text,
                 Description = _txtDescription.Text,
                 Strength = GetAsInt32 (_txtStrength),
                 Intelligence = GetAsInt32 (_txtIntelligence),

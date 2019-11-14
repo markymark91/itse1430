@@ -2,6 +2,7 @@
  * ITSE 1430
  */
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 
 namespace Nile.Windows
@@ -38,10 +39,23 @@ namespace Nile.Windows
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
-            //TODO: Handle errors
-            //Save product
-            _database.Add(child.Product);
-            UpdateList();
+            else //if (child.ShowDialog (this) == DialogResult.OK)
+            {
+                try
+                {
+                    _database.Add (child.Product);
+                    UpdateList ();
+                } catch (ArgumentException ex)
+                {
+                    MessageBox.Show (ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } catch (ValidationException ex)
+                {
+                    MessageBox.Show (ex.Message, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } catch (Exception)
+                {
+                    MessageBox.Show ("Save failed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void OnProductEdit( object sender, EventArgs e )
@@ -100,14 +114,29 @@ namespace Nile.Windows
         private void DeleteProduct ( Product product )
         {
             //Confirm
-            if (MessageBox.Show(this, $"Are you sure you want to delete '{product.Name}'?",
+            if (MessageBox.Show (this, $"Are you sure you want to delete '{product.Name}'?",
                                 "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
+            else
+            {
+                try
+                {
+                    //Delete product
+                    _database.Remove (product.Id);
+                    UpdateList ();
+                } catch (ArgumentException ex)
+                {
+                    MessageBox.Show (ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } catch (ValidationException ex)
+                {
+                    MessageBox.Show (ex.Message, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } catch (Exception)
+                {
+                    MessageBox.Show ("Save failed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            
 
-            //TODO: Handle errors
-            //Delete product
-            _database.Remove(product.Id);
-            UpdateList();
         }
 
         private void EditProduct ( Product product )
@@ -116,11 +145,25 @@ namespace Nile.Windows
             child.Product = product;
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
-
-            //TODO: Handle errors
-            //Save product
-            _database.Update(child.Product);
-            UpdateList();
+            
+            else
+            {
+                try
+                {
+                    //Save product
+                    _database.Update (child.Product);
+                    UpdateList ();
+                } catch (ArgumentException ex)
+                {
+                    MessageBox.Show (ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } catch (ValidationException ex)
+                {
+                    MessageBox.Show (ex.Message, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } catch (Exception)
+                {
+                    MessageBox.Show ("Save failed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private Product GetSelectedProduct ()
@@ -133,9 +176,19 @@ namespace Nile.Windows
 
         private void UpdateList ()
         {
-            //TODO: Handle errors
-
-            _bsProducts.DataSource = _database.GetAll();
+            try
+            {
+                _bsProducts.DataSource = _database.GetAll ();
+            } catch (ArgumentException ex)
+            {
+                MessageBox.Show (ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } catch (ValidationException ex)
+            {
+                MessageBox.Show (ex.Message, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } catch (Exception)
+            {
+                MessageBox.Show ("Save failed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
