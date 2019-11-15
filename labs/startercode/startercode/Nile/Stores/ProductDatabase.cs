@@ -23,9 +23,9 @@ namespace Nile.Stores
             if (results.Count () > 0)
                 throw new ValidationException (results.FirstOrDefault ().ErrorMessage);
 
-            var existing = GetCore (product.Id);
+            var existing = GetByNameCore (product.Name);
             if (existing != null)
-                throw new ArgumentException ("Product must be unique");
+                throw new InvalidOperationException ("Product must be unique");
 
             //Emulate database by storing copy
             return AddCore(product);
@@ -75,7 +75,9 @@ namespace Nile.Stores
                 throw new ValidationException (results.FirstOrDefault ().ErrorMessage);
 
             //Get existing product
-            var existing = GetCore(product.Id);
+            var existing = GetByNameCore(product.Name);
+            if (existing != null && existing.Id != product.Id)
+                throw new ArgumentException ("Product must be unique");
 
             return UpdateCore(existing, product);
         }
@@ -91,6 +93,8 @@ namespace Nile.Stores
         protected abstract Product UpdateCore( Product existing, Product newItem );
 
         protected abstract Product AddCore( Product product );
+
+        protected abstract Product GetByNameCore ( string name );
         #endregion
     }
 }

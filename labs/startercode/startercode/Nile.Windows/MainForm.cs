@@ -145,7 +145,6 @@ namespace Nile.Windows
             child.Product = product;
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
-            
             else
             {
                 try
