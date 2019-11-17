@@ -1,9 +1,15 @@
 /*
+ * Mark Dobbins
+ * Lab 4
  * ITSE 1430
  */
+
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
+using System.Linq;
 using System.Windows.Forms;
+using Nile.Stores.Sql;
 
 namespace Nile.Windows
 {
@@ -20,6 +26,9 @@ namespace Nile.Windows
         protected override void OnLoad( EventArgs e )
         {
             base.OnLoad(e);
+
+            var connString = ConfigurationManager.ConnectionStrings["ProductDatabase"];
+            _database = new SqlProductDatabase (connString.ConnectionString);
 
             _gridProducts.AutoGenerateColumns = false;
 
@@ -39,7 +48,7 @@ namespace Nile.Windows
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
-            else //if (child.ShowDialog (this) == DialogResult.OK)
+            else 
             {
                 try
                 {
@@ -82,7 +91,7 @@ namespace Nile.Windows
         private void OnEditRow( object sender, DataGridViewCellEventArgs e )
         {
             var grid = sender as DataGridView;
-
+            
             //Handle column clicks
             if (e.RowIndex < 0)
                 return;
@@ -177,7 +186,11 @@ namespace Nile.Windows
         {
             try
             {
-                _bsProducts.DataSource = _database.GetAll ();
+                var products = from p in _database.GetAll ()
+                               orderby p.Name
+                               select p;
+                _bsProducts.DataSource = products.ToArray ();
+                
             } catch (ArgumentException ex)
             {
                 MessageBox.Show (ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -190,7 +203,7 @@ namespace Nile.Windows
             }
         }
 
-        private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+        private IProductDatabase _database;
         #endregion
 
         private void OnHelpAbout ( object sender, EventArgs e )

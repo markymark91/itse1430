@@ -1,6 +1,9 @@
 /*
+ * Mark Dobbins
+ * Lab 4
  * ITSE 1430
  */
+
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -109,7 +112,6 @@ namespace Nile.Windows
 
             if (GetPrice(tb) < 0)
             {
-                e.Cancel = true;
                 _errors.SetError(_txtPrice, "Price must be >= 0.");
             } else
                 _errors.SetError(_txtPrice, "");

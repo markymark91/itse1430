@@ -1,4 +1,6 @@
 /*
+ * Mark Dobbins
+ * Lab 4
  * ITSE 1430
  */
 using System;
@@ -23,7 +25,7 @@ namespace Nile.Stores
             if (results.Count () > 0)
                 throw new ValidationException (results.FirstOrDefault ().ErrorMessage);
 
-            var existing = GetByNameCore (product.Name);
+            var existing = GetCore (product.Id);
             if (existing != null)
                 throw new InvalidOperationException ("Product must be unique");
 
@@ -75,7 +77,7 @@ namespace Nile.Stores
                 throw new ValidationException (results.FirstOrDefault ().ErrorMessage);
 
             //Get existing product
-            var existing = GetByNameCore(product.Name);
+            var existing = GetCore(product.Id);
             if (existing != null && existing.Id != product.Id)
                 throw new ArgumentException ("Product must be unique");
 
@@ -94,7 +96,6 @@ namespace Nile.Stores
 
         protected abstract Product AddCore( Product product );
 
-        protected abstract Product GetByNameCore ( string name );
         #endregion
     }
 }

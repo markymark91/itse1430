@@ -1,9 +1,11 @@
 /*
+ * Mark Dobbins
+ * Lab 4
  * ITSE 1430
  */
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Nile.Stores
 {
@@ -89,11 +91,6 @@ namespace Nile.Stores
             };
 
             return null;
-        }
-
-        protected override Product GetByNameCore ( string name )
-        {
-            return _products.FirstOrDefault (p => String.Compare (p.Name, name, true) == 0);
         }
 
         private List<Product> _products = new List<Product>();

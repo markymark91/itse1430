@@ -1,6 +1,9 @@
 /*
+ * Mark Dobbins
+ * Lab 4
  * ITSE 1430
  */
+
 using System;
 using System.Collections.Generic;
 
