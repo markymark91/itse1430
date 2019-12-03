@@ -22,5 +22,21 @@ namespace Itse1430.MovieLib.WebHost.Models
                 RunLength = source.RunLength
             };
         }
+        public static Movie ToDomain ( this MovieModel source )
+        {
+            if (source == null)
+                return null;
+
+            return new Movie () {
+                Id = source.Id,
+                Title = source.Title,
+                Description = source.Description,
+                HasSeen = source.HasSeen,
+                Rating = source.Rating,
+                ReleaseYear = source.ReleaseYear,
+                RunLength = source.RunLength
+            };
+        }
     }
+
 }
