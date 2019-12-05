@@ -1,36 +1,37 @@
 ﻿@model IEnumerable<Itse1430.MovieLib.WebHost.Models.MovieModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List";
+    ViewBag.SomeProperty = 10;
+    var value = ViewBag.AnotherProperty;
 }
 
-<h2>Index</h2>
+<h1>List</h1>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReleaseYear)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RunLength)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HasSeen)
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RunLength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasSeen)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
     <tr>
@@ -59,5 +60,7 @@
         </td>
     </tr>
 }
-
 </table>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
